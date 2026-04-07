@@ -189,6 +189,24 @@
     "partnerSubject": "Partnership Enquiry"
   },
   "footer": {
-    "address": "Center of Translational Cancer Research \u00b7 Einsteinstr. 25, 81675 Munich, Germany"
+    "address": "Center of Translational Cancer Research \u00b7 Einsteinstr. 25, 81675 Munich, Germany",
+    "cookieSettings": "Cookie Settings",
+    "privacyPolicy": "Privacy Policy",
+    "imprint": "Imprint"
+  },
+  "cookieConsent": {
+    "title": "We value your privacy",
+    "description": "We use cookies to improve your experience and analyze site traffic. You can choose which cookies you allow. Only essential cookies are set by default.",
+    "necessary": "Essential",
+    "necessaryDesc": "Required for the website to function. Cannot be disabled.",
+    "analytics": "Analytics",
+    "analyticsDesc": "Help us understand how visitors interact with our website.",
+    "marketing": "Marketing",
+    "marketingDesc": "Used to deliver relevant advertisements and track campaigns.",
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject all",
+    "customize": "Customize",
+    "savePreferences": "Save preferences",
+    "devNote": "No analytics or marketing tools are currently tracking non-essential user data"
   }
 }

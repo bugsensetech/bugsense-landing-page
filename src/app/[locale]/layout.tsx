@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Montserrat } from "next/font/google";
 import { routing } from "@/i18n/routing";
+import { CookieConsent } from "@/components/CookieConsent";
 import "../globals.css";
 
 const montserrat = Montserrat({
@@ -99,6 +100,7 @@ export default async function LocaleLayout({
         />
         <NextIntlClientProvider messages={messages}>
           {children}
+          <CookieConsent />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -189,6 +189,24 @@
     "partnerSubject": "Partnerschafts-Anfrage"
   },
   "footer": {
-    "address": "Center of Translational Cancer Research \u00b7 Einsteinstr. 25, 81675 M\u00fcnchen, Deutschland"
+    "address": "Center of Translational Cancer Research \u00b7 Einsteinstr. 25, 81675 M\u00fcnchen, Deutschland",
+    "cookieSettings": "Cookie-Einstellungen",
+    "privacyPolicy": "Datenschutz",
+    "imprint": "Impressum"
+  },
+  "cookieConsent": {
+    "title": "Wir respektieren Ihre Privatsph\u00e4re",
+    "description": "Wir verwenden Cookies, um Ihre Erfahrung zu verbessern und den Website-Verkehr zu analysieren. Sie k\u00f6nnen w\u00e4hlen, welche Cookies Sie zulassen. Standardm\u00e4\u00dfig werden nur essenzielle Cookies gesetzt.",
+    "necessary": "Essenziell",
+    "necessaryDesc": "Erforderlich f\u00fcr die Funktion der Website. Kann nicht deaktiviert werden.",
+    "analytics": "Analyse",
+    "analyticsDesc": "Helfen uns zu verstehen, wie Besucher mit unserer Website interagieren.",
+    "marketing": "Marketing",
+    "marketingDesc": "Werden verwendet, um relevante Werbung zu schalten und Kampagnen zu verfolgen.",
+    "acceptAll": "Alle akzeptieren",
+    "rejectAll": "Alle ablehnen",
+    "customize": "Anpassen",
+    "savePreferences": "Einstellungen speichern",
+    "devNote": "Es werden derzeit keine Analyse- oder Marketing-Tools zur Erfassung nicht essenzieller Nutzerdaten verwendet"
   }
 }
