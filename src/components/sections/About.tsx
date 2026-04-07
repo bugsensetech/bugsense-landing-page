@@ -1,35 +1,11 @@
 import { Section } from "@/components/ui/section";
-import { CheckCircle2 } from "lucide-react";
-
-const credentials = [
-  "Peer-reviewed publication — Microbiology Spectrum (ASM, 2025)",
-  "International patent granted for core diagnostic technology",
-  "Clinical partner: MRI Munich · Klinikum rechts der Isar",
-  "GO-Bio funded · m\u2074 Award winner 2023 · Bavarian Ministry grant",
-  "IVD regulatory pathway (CE-IVD) in progress",
-];
 
 const milestones = [
-  {
-    year: "2021",
-    text: "Core technology developed at TUM. First paper-based prototype validated under laboratory conditions.",
-  },
-  {
-    year: "2022",
-    text: "Clinical partnership with MRI Munich. First patient samples tested in clinical setting.",
-  },
-  {
-    year: "2023",
-    text: "m\u2074 Award. GO-Bio grant (BMBF). International patent filed. Bavarian Ministry sponsorship.",
-  },
-  {
-    year: "2024",
-    text: "n=142 clinical validation completed. TUM Venture Labs cohort. Company formation initiated.",
-  },
-  {
-    year: "2025",
-    text: "Published in Microbiology Spectrum (ASM). IVD regulatory pathway started. Pilot programmes launching.",
-  },
+  { year: "2021", text: "Technology developed at TUM" },
+  { year: "2022", text: "First clinical samples tested" },
+  { year: "2023", text: "GO-Bio funded · m⁴ Award · Patent filed" },
+  { year: "2024", text: "n=142 clinical validation completed" },
+  { year: "2025", text: "Published in ASM · Pilots launching" },
 ];
 
 export function About() {
@@ -37,9 +13,8 @@ export function About() {
     <Section
       id="about"
       className="py-24 lg:py-32 bg-white border-t border-p-100/40"
-      innerClassName="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start"
     >
-      <div>
+      <div className="max-w-2xl mb-14">
         <span className="text-xs font-bold tracking-[0.12em] uppercase text-p-600 mb-4 block">
           About BugSense
         </span>
@@ -48,8 +23,7 @@ export function About() {
           <br />
           Now we build the company.
         </h2>
-
-        <div className="space-y-4 text-[15px] text-muted-custom leading-relaxed mb-8">
+        <div className="space-y-4 text-base text-muted-custom leading-relaxed">
           <p>
             BugSense was founded to solve a problem that has persisted for
             decades: doctors treating UTIs cannot access microbiological culture
@@ -70,57 +44,63 @@ export function About() {
             .
           </p>
         </div>
+      </div>
 
-        <div className="space-y-2.5">
-          {credentials.map((cred) => (
-            <div key={cred} className="flex items-start gap-2.5">
-              <CheckCircle2 className="size-4 text-p-600 shrink-0 mt-0.5" />
-              <span className="text-[15px] text-p-800 font-medium leading-relaxed">
-                {cred}
-              </span>
+      {/* Timeline — vertical on mobile, horizontal on sm+ */}
+
+      {/* Mobile: vertical */}
+      <div className="relative sm:hidden">
+        <div className="absolute left-[8px] top-1 bottom-1 w-px bg-p-100" />
+        <div className="space-y-5">
+          {milestones.map((m, i) => (
+            <div key={m.year} className="flex gap-4 relative pl-1">
+              <div className="relative shrink-0 flex items-start pt-1.5">
+                <div
+                  className={`size-[9px] rounded-full z-10 ${
+                    i === milestones.length - 1 ? "bg-p-600" : "bg-p-200"
+                  }`}
+                />
+              </div>
+              <div>
+                <span
+                  className={`text-base font-bold tabular-nums block mb-0.5 ${
+                    i === milestones.length - 1 ? "text-p-600" : "text-p-800"
+                  }`}
+                >
+                  {m.year}
+                </span>
+                <p className="text-[15px] text-muted-custom leading-relaxed">
+                  {m.text}
+                </p>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="bg-p-50 border border-p-100/50 p-7">
-        <h3 className="text-xs font-bold uppercase tracking-[0.1em] text-p-600 mb-8">
-          Company milestones
-        </h3>
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-[19px] top-1 bottom-1 w-px bg-p-200/60" />
-
-          <div className="space-y-7">
-            {milestones.map((m, i) => (
-              <div key={m.year} className="flex gap-5 relative">
-                {/* Dot */}
-                <div className="relative shrink-0 w-[39px] flex justify-center pt-1.5">
-                  <div
-                    className={`size-3 rounded-full z-10 ${
-                      i === milestones.length - 1
-                        ? "bg-p-600"
-                        : "bg-p-300"
-                    }`}
-                  />
-                </div>
-                <div>
-                  <span
-                    className={`text-[15px] font-extrabold tabular-nums block mb-1.5 ${
-                      i === milestones.length - 1
-                        ? "text-p-600"
-                        : "text-p-800"
-                    }`}
-                  >
-                    {m.year}
-                  </span>
-                  <p className="text-[15px] text-p-800/60 leading-relaxed">
-                    {m.text}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* Desktop: horizontal */}
+      <div className="relative hidden sm:block">
+        <div className="absolute top-[5px] left-0 right-0 h-px bg-p-100" />
+        <div className="grid grid-cols-5">
+          {milestones.map((m, i) => (
+            <div key={m.year} className="relative pt-5 pr-6">
+              <div
+                className={`absolute top-0 left-0 size-[11px] rounded-full ${
+                  i === milestones.length - 1 ? "bg-p-600" : "bg-p-200"
+                }`}
+              />
+              <span
+                className={`text-sm font-bold tabular-nums block mb-1 ${
+                  i === milestones.length - 1 ? "text-p-600" : "text-p-800"
+                }`}
+              >
+                {m.year}
+              </span>
+              <p className="text-[13px] text-muted-custom leading-relaxed">
+                {m.text}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </Section>
