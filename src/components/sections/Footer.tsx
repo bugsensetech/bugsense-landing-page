@@ -10,16 +10,16 @@ export function Footer() {
     >
       <div className="flex items-center gap-3">
         <BugSenseIcon className="w-4 h-4" color="white" />
-        <span className="text-xs font-bold text-white uppercase tracking-wider">
+        <span className="text-sm font-bold text-white uppercase tracking-wider">
           BugSense
         </span>
-        <span className="text-[10px] text-white/20 ml-3 hidden sm:inline">
-          Einsteinstr. 25, 81675 Munich
+        <span className="text-xs text-white/20 ml-3 hidden sm:inline">
+          Center of Translational Cancer Research · Einsteinstr. 25, 81675 Munich, Germany
         </span>
       </div>
       <a
         href="mailto:contact@bugsensedx.com"
-        className="text-[10px] text-white/25 hover:text-white/50 transition-colors"
+        className="text-xs text-white/25 hover:text-white/50 transition-colors"
       >
         contact@bugsensedx.com
       </a>

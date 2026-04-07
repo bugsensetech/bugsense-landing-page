@@ -25,15 +25,7 @@ export function Hero() {
       </video>
 
       {/* Overlay — smooth left-to-right */}
-      <div className="absolute inset-0 bg-p-900/30" />
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(105deg, #26215C 0%, #26215Cee 22%, #26215Caa 40%, #26215C55 58%, #26215C22 75%, transparent 100%)",
-        }}
-      />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-p-900 to-transparent" />
+      <div className="absolute inset-0 bg-p-900/50" />
 
       <div className="relative z-10 mx-auto max-w-[1100px] px-6 lg:px-12 w-full py-32">
         <div className="max-w-xl">

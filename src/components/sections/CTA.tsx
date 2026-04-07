@@ -24,32 +24,35 @@ const cards = [
 
 export function CTA() {
   return (
-    <Section id="contact" className="bg-p-600 py-24 lg:py-32 text-center">
-      <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
-        Ready to work together?
-      </h2>
-      <p className="text-base text-white/55 mb-14 max-w-md mx-auto leading-relaxed">
-        We&apos;re running clinical pilots, building investor relationships, and
-        exploring strategic partnerships.
-      </p>
+    <Section id="contact" className="bg-p-900 py-24 lg:py-32">
+      <div className="text-center mb-16">
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
+          Ready to work together?
+        </h2>
+        <p className="text-base text-white/40 max-w-md mx-auto leading-relaxed">
+          We&apos;re running clinical pilots, building investor relationships,
+          and exploring strategic partnerships.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 max-w-3xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {cards.map((card) => (
           <a
             key={card.label}
             href={card.href}
-            className="group bg-p-600 hover:bg-p-400/30 p-7 text-left transition-colors"
+            className="group relative border border-white/[0.08] rounded-lg p-7 hover:border-white/20 transition-all duration-300 hover:bg-white/[0.03]"
           >
-            <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-white/35 block mb-3">
+            <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-p-400/70 block mb-4">
               {card.label}
             </span>
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="text-base font-bold text-white">{card.title}</h3>
-              <ArrowRight className="size-4 text-white/25 group-hover:text-white/60 group-hover:translate-x-0.5 transition-all" />
-            </div>
-            <p className="text-sm text-white/45 leading-relaxed">
+            <h3 className="text-lg font-bold text-white mb-2">{card.title}</h3>
+            <p className="text-sm text-white/30 leading-relaxed mb-6">
               {card.desc}
             </p>
+            <div className="flex items-center gap-2 text-sm font-semibold text-p-400/80 group-hover:text-p-200 transition-colors">
+              <span>Get in touch</span>
+              <ArrowRight className="size-3.5 group-hover:translate-x-1 transition-transform duration-200" />
+            </div>
           </a>
         ))}
       </div>
