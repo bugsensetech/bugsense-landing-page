@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
+import { CONTACT_EMAIL } from "@/lib/constants";
 import { ExternalLink } from "lucide-react";
 
 export function Validation() {
@@ -74,7 +75,7 @@ export function Validation() {
             </strong>
           </p>
           <a
-            href="mailto:contact@bugsensedx.com?subject=Paper Request"
+            href={`mailto:${CONTACT_EMAIL}?subject=Paper Request`}
             className="inline-flex items-center gap-1.5 text-xs font-bold text-t-400 mt-2.5 hover:text-t-300 transition-colors uppercase tracking-wider"
           >
             {t("requestPaper")}

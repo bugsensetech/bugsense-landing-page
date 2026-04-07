@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
+import { CONTACT_EMAIL } from "@/lib/constants";
 import { BugSenseIcon } from "@/components/ui/logo";
 
 export function Footer() {
@@ -32,10 +33,10 @@ export function Footer() {
           </span>
         </div>
         <a
-          href="mailto:contact@bugsensedx.com"
+          href={`mailto:${CONTACT_EMAIL}`}
           className="text-xs text-white/40 hover:text-white/50 transition-colors"
         >
-          contact@bugsensedx.com
+          {CONTACT_EMAIL}
         </a>
       </div>
       {/* Hidden until HAS_NON_ESSENTIAL_COOKIES is enabled in CookieConsent.tsx */}

@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Montserrat } from "next/font/google";
 import { routing } from "@/i18n/routing";
+import { SITE_URL } from "@/lib/constants";
 import { CookieConsent } from "@/components/CookieConsent";
 import "../globals.css";
 
@@ -34,7 +35,7 @@ export async function generateMetadata({
     openGraph: {
       title: t("ogTitle"),
       description: t("ogDescription"),
-      url: "https://bugsensedx.com",
+      url: SITE_URL,
       siteName: "BugSense",
       locale: locale === "de" ? "de_DE" : "en_US",
       type: "website",
@@ -49,11 +50,11 @@ export async function generateMetadata({
       follow: true,
     },
     alternates: {
-      canonical: `https://bugsensedx.com/${locale}`,
+      canonical: `${SITE_URL}/${locale}`,
       languages: {
-        en: "https://bugsensedx.com/en",
-        de: "https://bugsensedx.com/de",
-        "x-default": "https://bugsensedx.com/en",
+        en: `${SITE_URL}/en`,
+        de: `${SITE_URL}/de`,
+        "x-default": `${SITE_URL}/en`,
       },
     },
     icons: {
@@ -90,7 +91,7 @@ export default async function LocaleLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "BugSense",
-              url: "https://bugsensedx.com",
+              url: SITE_URL,
               description:
                 locale === "de"
                   ? "Vollständige mikrobiologische HWI-Diagnostik am Point of Care"

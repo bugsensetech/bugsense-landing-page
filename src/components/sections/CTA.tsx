@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
+import { CONTACT_EMAIL } from "@/lib/constants";
 import { ArrowRight } from "lucide-react";
 
 export function CTA() {
@@ -10,19 +11,19 @@ export function CTA() {
       label: t("forClinicians"),
       title: t("runPilot"),
       desc: t("runPilotDesc"),
-      href: `mailto:contact@bugsensedx.com?subject=${t("pilotSubject")}`,
+      href: `mailto:${CONTACT_EMAIL}?subject=${t("pilotSubject")}`,
     },
     {
       label: t("forInvestors"),
       title: t("requestMaterials"),
       desc: t("requestMaterialsDesc"),
-      href: `mailto:contact@bugsensedx.com?subject=${t("investorSubject")}`,
+      href: `mailto:${CONTACT_EMAIL}?subject=${t("investorSubject")}`,
     },
     {
       label: t("forPartners"),
       title: t("explorePartnership"),
       desc: t("explorePartnershipDesc"),
-      href: `mailto:contact@bugsensedx.com?subject=${t("partnerSubject")}`,
+      href: `mailto:${CONTACT_EMAIL}?subject=${t("partnerSubject")}`,
     },
   ];
 

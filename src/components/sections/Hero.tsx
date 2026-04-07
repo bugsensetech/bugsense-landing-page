@@ -39,7 +39,7 @@ export function Hero() {
     const t4 = setTimeout(() => {
       stage3Reached = true;
       showVideo();
-    }, 1800);
+    }, 900);
 
     if (video) {
       video.addEventListener("canplay", onCanPlay);
@@ -72,10 +72,13 @@ export function Hero() {
         loop
         muted
         playsInline
+        preload="metadata"
+        poster="/hero-poster.webp"
         className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[1500ms] ease-out ${
           stage >= 4 ? "opacity-50" : "opacity-0"
         }`}
       >
+        <source src="/hero-video.webm" type="video/webm" />
         <source src="/hero-video.m4v" type="video/mp4" />
       </video>
 
