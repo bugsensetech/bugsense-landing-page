@@ -82,6 +82,21 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} className={`${montserrat.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "BugSense",
+              url: "https://bugsensedx.com",
+              description:
+                locale === "de"
+                  ? "Vollständige mikrobiologische HWI-Diagnostik am Point of Care"
+                  : "Complete microbiological UTI diagnostics at the point of care",
+            }),
+          }}
+        />
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>
