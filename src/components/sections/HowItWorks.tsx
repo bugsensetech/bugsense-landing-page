@@ -20,8 +20,8 @@ const steps = [
     num: "03",
     icon: Smartphone,
     time: "4\u201312 h",
-    title: "Scan with smartphone",
-    desc: "The BugSense app reads colorimetric growth signals in real time using AI-supported kinetics.",
+    title: "Wait, then scan",
+    desc: "After 4\u201312 hours of incubation, scan the cassette with the BugSense app. AI-supported kinetics read colorimetric growth signals and generate the result.",
   },
   {
     num: "04",

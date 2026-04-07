@@ -2,46 +2,31 @@ import Image from "next/image";
 import { Section } from "@/components/ui/section";
 import { ExternalLink } from "lucide-react";
 
-const primaryMetrics = [
-  {
-    value: "100",
-    unit: "%",
-    label: "Sensitivity for infection detection",
-    sublabel: "Primary endpoint",
-    highlight: true,
-  },
+const supportingMetrics = [
   {
     value: "94",
     unit: "%",
-    label: "Specificity for infection detection",
-    sublabel: "Primary endpoint",
+    label: "Specificity (infection detection)",
   },
-  {
-    value: "142",
-    unit: "",
-    label: "Clinical samples across validation study",
-    sublabel: "Sample size",
-  },
-];
-
-const secondaryMetrics = [
   {
     value: "85.6",
     unit: "%",
-    label: "Sensitivity for pathogen species ID",
-    sublabel: "Secondary endpoint",
+    label: "Sensitivity (pathogen species ID)",
   },
   {
     value: "95",
     unit: "%",
-    label: "Specificity for pathogen species ID",
-    sublabel: "Secondary endpoint",
+    label: "Specificity (pathogen species ID)",
+  },
+  {
+    value: "142",
+    unit: "",
+    label: "Clinical samples validated",
   },
   {
     value: "Int'l",
     unit: "",
-    label: "Patent granted for core technology",
-    sublabel: "IP protected",
+    label: "Patent granted",
   },
 ];
 
@@ -59,51 +44,32 @@ export function Validation() {
         </h2>
       </div>
 
-      {/* Primary metrics */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/[0.06] mb-px">
-        {primaryMetrics.map((m) => (
-          <div
-            key={m.label}
-            className={`p-7 text-center ${
-              m.highlight ? "bg-t-400/8" : "bg-p-900"
-            }`}
-          >
-            <div
-              className={`text-5xl sm:text-6xl font-extrabold tracking-tighter leading-none ${
-                m.highlight ? "text-t-300" : "text-white"
-              }`}
-            >
-              {m.value}
-              {m.unit && (
-                <span className="text-2xl font-bold">{m.unit}</span>
-              )}
-            </div>
-            <p className="text-sm text-white/45 mt-3 leading-relaxed">
-              {m.label}
-            </p>
-            <span className="text-[11px] text-white/20 mt-1 uppercase tracking-wider font-bold block">
-              {m.sublabel}
-            </span>
-          </div>
-        ))}
+      {/* Leading KPI */}
+      <div className="bg-t-400/8 border border-t-400/20 p-10 sm:p-14 text-center mb-6">
+        <div className="text-7xl sm:text-8xl lg:text-9xl font-extrabold text-t-300 tracking-tighter leading-none">
+          100<span className="text-4xl sm:text-5xl font-bold">%</span>
+        </div>
+        <p className="text-lg sm:text-xl text-white/70 mt-4 font-medium">
+          Sensitivity for infection detection
+        </p>
+        <span className="text-xs text-white/30 mt-2 uppercase tracking-wider font-bold block">
+          Primary endpoint · n=142 clinical samples
+        </span>
       </div>
 
-      {/* Secondary metrics */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/[0.06] mb-8">
-        {secondaryMetrics.map((m) => (
-          <div key={m.label} className="bg-p-900 p-7 text-center">
-            <div className="text-4xl font-extrabold text-white tracking-tighter leading-none">
+      {/* Supporting metrics */}
+      <div className="grid grid-cols-2 sm:grid-cols-5 gap-px bg-white/[0.06] mb-8">
+        {supportingMetrics.map((m) => (
+          <div key={m.label} className="bg-p-900 p-5 text-center">
+            <div className="text-2xl sm:text-3xl font-extrabold text-white/70 tracking-tighter leading-none">
               {m.value}
               {m.unit && (
-                <span className="text-lg font-bold">{m.unit}</span>
+                <span className="text-sm font-bold">{m.unit}</span>
               )}
             </div>
-            <p className="text-sm text-white/45 mt-3 leading-relaxed">
+            <p className="text-xs text-white/35 mt-2 leading-relaxed">
               {m.label}
             </p>
-            <span className="text-[11px] text-white/20 mt-1 uppercase tracking-wider font-bold block">
-              {m.sublabel}
-            </span>
           </div>
         ))}
       </div>

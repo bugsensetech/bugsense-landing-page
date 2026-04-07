@@ -16,6 +16,7 @@ const rows: {
   dipstick: string | Status;
   lab: string | Status;
   pcr: string | Status;
+  unverified?: boolean;
 }[] = [
   {
     capability: "Time to full result",
@@ -23,6 +24,14 @@ const rows: {
     dipstick: "5 min*",
     lab: "48\u201396 h",
     pcr: "1\u20132 h",
+  },
+  {
+    capability: "Sample logistics time",
+    bugsense: "0 h",
+    dipstick: "0 h",
+    lab: "~23 h", // TODO: verify with paper
+    pcr: "partial",
+    unverified: true,
   },
   {
     capability: "Infection confirmation",
@@ -78,18 +87,18 @@ const rows: {
 function Cell({ value, featured }: { value: string | Status; featured?: boolean }) {
   if (value === "yes")
     return featured
-      ? <Check className="size-5 mx-auto text-white" strokeWidth={3} />
-      : <Check className="size-5 mx-auto text-green-500" strokeWidth={2.5} />;
+      ? <Check className="size-5 ml-auto md:mx-auto text-white" strokeWidth={3} />
+      : <Check className="size-5 ml-auto md:mx-auto text-green-500" strokeWidth={2.5} />;
   if (value === "no")
     return featured
-      ? <X className="size-5 mx-auto text-white/25" strokeWidth={2} />
-      : <X className="size-5 mx-auto text-p-200/50" strokeWidth={2} />;
+      ? <X className="size-5 ml-auto md:mx-auto text-white/25" strokeWidth={2} />
+      : <X className="size-5 ml-auto md:mx-auto text-p-200/50" strokeWidth={2} />;
   if (value === "partial")
     return (
-      <span className={`text-lg font-bold mx-auto ${featured ? "text-amber-300" : "text-amber-500"}`}>~</span>
+      <Minus className={`size-5 ml-auto md:mx-auto ${featured ? "text-amber-300" : "text-amber-500"}`} strokeWidth={2.5} />
     );
   return (
-    <span className={`text-sm font-bold ${featured ? "text-white" : "text-p-800/50"}`}>
+    <span className={`text-sm font-bold ml-auto md:mx-auto ${featured ? "text-white" : "text-p-800/50"}`}>
       {value}
     </span>
   );
@@ -106,9 +115,9 @@ export function Comparison() {
           Technology comparison
         </span>
         <h2 className="text-4xl sm:text-5xl font-extrabold text-p-900 tracking-tight leading-tight">
-          No other point-of-care test
+          Full resistance profiling
           <br />
-          delivers all of this.
+          without a central lab.
         </h2>
       </div>
 
@@ -119,7 +128,7 @@ export function Comparison() {
             key={method.key}
             className={`border p-5 ${
               method.featured
-                ? "border-p-600 bg-p-50/30"
+                ? "border-p-600 bg-p-600 text-white"
                 : "border-p-100"
             }`}
           >
@@ -134,8 +143,8 @@ export function Comparison() {
               {rows.map((row) => {
                 const val = row[method.key];
                 return (
-                  <div key={row.capability} className="flex items-center justify-between gap-3">
-                    <span className="text-sm text-p-800/70">{row.capability}</span>
+                  <div key={row.capability} className={`flex items-center justify-between gap-3 ${row.unverified ? "ring-1 ring-red-500 p-1.5 -mx-1.5" : ""}`}>
+                    <span className={`text-sm ${row.unverified ? "text-red-500" : method.featured ? "text-white/80" : "text-p-800/70"}`}>{row.capability}</span>
                     <Cell value={val} featured={method.featured} />
                   </div>
                 );
@@ -169,9 +178,10 @@ export function Comparison() {
           </thead>
           <tbody>
             {rows.map((row, i) => (
-              <tr key={row.capability}>
-                <td className={`text-left text-[15px] text-p-800 font-medium px-5 py-4 ${i < rows.length - 1 ? "border-b border-p-100/50" : ""}`}>
+              <tr key={row.capability} className={row.unverified ? "ring-2 ring-red-500 ring-inset" : ""}>
+                <td className={`text-left text-[15px] font-medium px-5 py-4 ${i < rows.length - 1 ? "border-b border-p-100/50" : ""} ${row.unverified ? "text-red-500" : "text-p-800"}`}>
                   {row.capability}
+                  {row.unverified && <span className="ml-2 text-[10px] font-bold text-red-400 bg-red-500/10 px-1.5 py-0.5 uppercase tracking-wider">Verify</span>}
                 </td>
                 <td className={`text-center px-5 py-4 bg-p-600 ${i < rows.length - 1 ? "border-b border-white/10" : ""}`}>
                   <Cell value={row.bugsense} featured />

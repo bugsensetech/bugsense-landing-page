@@ -20,6 +20,23 @@ const stats = [
   },
 ];
 
+const additionalStats = [
+  {
+    prefix: "~",
+    value: "23h",
+    unverified: true, // TODO: verify with latest paper (Oliver's suggestion)
+    desc: "Average logistics time for a blood culture sample from collection to result — often longer than the test itself",
+    source: "Clinical logistics data", // TODO: replace with actual paper reference
+  },
+  {
+    prefix: "~",
+    value: "70%",
+    unverified: true, // TODO: verify — no specific number was given in feedback
+    desc: "Of urine samples sent to central labs come back unremarkable — a majority of shipments produce no actionable result",
+    source: "Central laboratory data", // TODO: replace with actual source
+  },
+];
+
 export function Problem() {
   return (
     <Section id="problem" className="py-24 lg:py-32">
@@ -49,6 +66,27 @@ export function Problem() {
               {stat.desc}
             </p>
             <span className="text-[11px] text-white/30 font-bold tracking-wider uppercase">
+              {stat.source}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-p-800/50 mt-px">
+        {additionalStats.map((stat) => (
+          <div key={stat.value} className={`bg-p-900 p-8 ${stat.unverified ? "ring-2 ring-red-500 ring-inset relative" : ""}`}>
+            {stat.unverified && (
+              <span className="absolute top-2 right-2 text-[10px] font-bold text-red-400 bg-red-500/20 px-2 py-0.5 uppercase tracking-wider">
+                Needs verification
+              </span>
+            )}
+            <div className={`text-4xl sm:text-5xl font-extrabold tracking-tighter leading-none mb-3 ${stat.unverified ? "text-red-400" : "text-white"}`}>
+              {stat.prefix}{stat.value}
+            </div>
+            <p className="text-[15px] text-white/60 leading-relaxed mb-4">
+              {stat.desc}
+            </p>
+            <span className={`text-[11px] font-bold tracking-wider uppercase ${stat.unverified ? "text-red-400/60" : "text-white/30"}`}>
               {stat.source}
             </span>
           </div>

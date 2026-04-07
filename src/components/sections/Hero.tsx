@@ -30,9 +30,9 @@ export function Hero() {
       <div className="relative z-10 mx-auto max-w-[1100px] px-6 lg:px-12 w-full py-32">
         <div className="max-w-xl">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2.5 border border-white/[0.08] px-4 py-2 mb-10">
+          <div className="inline-flex items-center gap-2.5 border border-white/[0.6] px-4 py-2 mb-10">
             <span className="w-1.5 h-1.5 bg-t-400 animate-[pulse-dot_2s_infinite]" />
-            <span className="text-xs font-bold text-white/40 tracking-[0.1em] uppercase">
+            <span className="text-xs font-bold text-white/80 tracking-[0.1em] uppercase">
               Published · Microbiology Spectrum (ASM, 2025)
             </span>
           </div>
@@ -43,9 +43,9 @@ export function Hero() {
             <span className="text-p-400">Your Hands</span>
           </h1>
 
-          <p className="text-lg text-white/45 max-w-lg leading-relaxed mb-10">
+          <p className="text-lg text-white max-w-lg leading-relaxed mb-10">
             UTI treatment is a{" "}
-            <strong className="text-white/75 font-semibold">guess</strong>.
+            <strong className="text-white font-semibold">guess</strong>.
             Clinicians prescribe empirically and get it wrong up to 50% of the
             time. BugSense delivers complete microbiological diagnostics —
             pathogen ID, bacterial load, and antibiotic resistance — at the
@@ -68,14 +68,14 @@ export function Hero() {
             {stats.map((stat, i) => (
               <div key={stat.label} className="flex items-stretch">
                 {i > 0 && (
-                  <div className="w-px bg-white/10 mx-7 hidden sm:block" />
+                  <div className="w-px bg-white/30 mx-7 hidden sm:block" />
                 )}
                 {i > 0 && <div className="w-5 sm:hidden" />}
                 <div>
                   <div className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-white/30 mt-1 font-semibold uppercase tracking-wider">
+                  <div className="text-xs text-white/70 mt-1 font-semibold uppercase tracking-wider">
                     {stat.label}
                   </div>
                 </div>
