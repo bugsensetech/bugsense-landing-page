@@ -1,40 +1,48 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
 
-const advisors = [
+const advisors: {
+  name: string;
+  roleKey: "haydenRole" | "saberskyRole" | "costaRole" | "wantiaRole";
+  image?: string;
+  initials?: string;
+}[] = [
   {
     name: "Prof. Oliver Hayden",
-    role: "Heinz-Nixdorf Chair for Biomedical Electronics, TUM",
+    roleKey: "haydenRole",
     image: "/advisors/hayden.png",
   },
   {
     name: "Dr. Henning Sabersky-Muessigbrodt",
-    role: "Senior Clinician, Urology & Infectious Disease",
+    roleKey: "saberskyRole",
     initials: "HS",
   },
   {
     name: "Prof. Clarissa Prazeres da Costa",
-    role: "Director, Center of Global Health, TUM",
+    roleKey: "costaRole",
     image: "/advisors/costa.png",
   },
   {
     name: "Prof. Nina Wantia",
-    role: "Head of Clinical Microbiology, MRI Munich",
+    roleKey: "wantiaRole",
     image: "/advisors/wantia.png",
   },
 ];
 
 export function Advisors() {
+  const t = useTranslations("advisors");
+
   return (
     <Section className="py-24 lg:py-32">
       <div className="max-w-2xl mb-14">
         <span className="text-xs font-bold tracking-[0.12em] uppercase text-p-600 mb-4 block">
-          Scientific advisory board
+          {t("label")}
         </span>
         <h2 className="text-4xl sm:text-5xl font-extrabold text-p-900 tracking-tight leading-tight">
-          Guided by world-class
+          {t("title1")}
           <br />
-          clinical expertise.
+          {t("title2")}
         </h2>
       </div>
 
@@ -60,7 +68,7 @@ export function Advisors() {
               {a.name}
             </h3>
             <p className="text-sm text-muted-custom leading-relaxed mt-1">
-              {a.role}
+              {t(a.roleKey)}
             </p>
           </div>
         ))}

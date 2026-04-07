@@ -1,87 +1,26 @@
+import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
 import { Check, X, Minus } from "lucide-react";
-
-const methods = [
-  { key: "bugsense", label: "BugSense", featured: true },
-  { key: "dipstick", label: "Dipstick", featured: false },
-  { key: "lab", label: "Lab Culture", featured: false },
-  { key: "pcr", label: "POC PCR", featured: false },
-] as const;
 
 type Status = "yes" | "no" | "partial";
 
 const rows: {
-  capability: string;
+  capKey: string;
   bugsense: string | Status;
   dipstick: string | Status;
   lab: string | Status;
   pcr: string | Status;
   unverified?: boolean;
 }[] = [
-  {
-    capability: "Time to full result",
-    bugsense: "4\u201312 h",
-    dipstick: "5 min*",
-    lab: "48\u201396 h",
-    pcr: "1\u20132 h",
-  },
-  {
-    capability: "Sample logistics time",
-    bugsense: "0 h",
-    dipstick: "0 h",
-    lab: "~23 h", // TODO: verify with paper
-    pcr: "partial",
-    unverified: true,
-  },
-  {
-    capability: "Infection confirmation",
-    bugsense: "yes",
-    dipstick: "partial",
-    lab: "yes",
-    pcr: "yes",
-  },
-  {
-    capability: "Pathogen identification",
-    bugsense: "yes",
-    dipstick: "no",
-    lab: "yes",
-    pcr: "yes",
-  },
-  {
-    capability: "Antibiotic resistance profile",
-    bugsense: "yes",
-    dipstick: "no",
-    lab: "yes",
-    pcr: "no",
-  },
-  {
-    capability: "Bacterial load (CFU/mL)",
-    bugsense: "yes",
-    dipstick: "no",
-    lab: "yes",
-    pcr: "no",
-  },
-  {
-    capability: "No central lab required",
-    bugsense: "yes",
-    dipstick: "yes",
-    lab: "no",
-    pcr: "partial",
-  },
-  {
-    capability: "EUCAST-aligned reporting",
-    bugsense: "yes",
-    dipstick: "no",
-    lab: "yes",
-    pcr: "no",
-  },
-  {
-    capability: "Peer-reviewed validation",
-    bugsense: "yes",
-    dipstick: "yes",
-    lab: "yes",
-    pcr: "yes",
-  },
+  { capKey: "timeToResult", bugsense: "4\u201312 h", dipstick: "5 min*", lab: "48\u201396 h", pcr: "1\u20132 h" },
+  { capKey: "sampleLogistics", bugsense: "0 h", dipstick: "0 h", lab: "~23 h", pcr: "partial", unverified: true },
+  { capKey: "infectionConfirmation", bugsense: "yes", dipstick: "partial", lab: "yes", pcr: "yes" },
+  { capKey: "pathogenId", bugsense: "yes", dipstick: "no", lab: "yes", pcr: "yes" },
+  { capKey: "resistanceProfile", bugsense: "yes", dipstick: "no", lab: "yes", pcr: "no" },
+  { capKey: "bacterialLoad", bugsense: "yes", dipstick: "no", lab: "yes", pcr: "no" },
+  { capKey: "noCentralLab", bugsense: "yes", dipstick: "yes", lab: "no", pcr: "partial" },
+  { capKey: "eucastReporting", bugsense: "yes", dipstick: "no", lab: "yes", pcr: "no" },
+  { capKey: "peerReviewed", bugsense: "yes", dipstick: "yes", lab: "yes", pcr: "yes" },
 ];
 
 function Cell({ value, featured }: { value: string | Status; featured?: boolean }) {
@@ -105,6 +44,15 @@ function Cell({ value, featured }: { value: string | Status; featured?: boolean 
 }
 
 export function Comparison() {
+  const t = useTranslations("comparison");
+
+  const methods = [
+    { key: "bugsense" as const, label: t("bugsense"), featured: true },
+    { key: "dipstick" as const, label: t("dipstick"), featured: false },
+    { key: "lab" as const, label: t("labCulture"), featured: false },
+    { key: "pcr" as const, label: t("pocPcr"), featured: false },
+  ];
+
   return (
     <Section
       id="comparison"
@@ -112,12 +60,12 @@ export function Comparison() {
     >
       <div className="max-w-2xl mb-14">
         <span className="text-xs font-bold tracking-[0.12em] uppercase text-p-600 mb-4 block">
-          Technology comparison
+          {t("label")}
         </span>
         <h2 className="text-4xl sm:text-5xl font-extrabold text-p-900 tracking-tight leading-tight">
-          Full resistance profiling
+          {t("title1")}
           <br />
-          without a central lab.
+          {t("title2")}
         </h2>
       </div>
 
@@ -143,8 +91,8 @@ export function Comparison() {
               {rows.map((row) => {
                 const val = row[method.key];
                 return (
-                  <div key={row.capability} className={`flex items-center justify-between gap-3 ${row.unverified ? "ring-1 ring-red-500 p-1.5 -mx-1.5" : ""}`}>
-                    <span className={`text-sm ${row.unverified ? "text-red-500" : method.featured ? "text-white/80" : "text-p-800/70"}`}>{row.capability}</span>
+                  <div key={row.capKey} className={`flex items-center justify-between gap-3 ${row.unverified ? "ring-1 ring-red-500 p-1.5 -mx-1.5" : ""}`}>
+                    <span className={`text-sm ${row.unverified ? "text-red-500" : method.featured ? "text-white/80" : "text-p-800/70"}`}>{t(row.capKey)}</span>
                     <Cell value={val} featured={method.featured} />
                   </div>
                 );
@@ -160,28 +108,28 @@ export function Comparison() {
           <thead>
             <tr>
               <th className="text-left text-xs font-bold text-p-800/40 uppercase tracking-[0.1em] px-5 py-4 border-b-2 border-p-900 w-[30%]">
-                Capability
+                {t("capability")}
               </th>
               <th className="text-center text-xs font-bold text-white uppercase tracking-[0.1em] px-5 py-4 bg-p-600 rounded-t-sm">
-                BugSense
+                {t("bugsense")}
               </th>
               <th className="text-center text-xs font-bold text-p-800/40 uppercase tracking-[0.1em] px-5 py-4 border-b-2 border-p-900">
-                Dipstick
+                {t("dipstick")}
               </th>
               <th className="text-center text-xs font-bold text-p-800/40 uppercase tracking-[0.1em] px-5 py-4 border-b-2 border-p-900">
-                Lab Culture
+                {t("labCulture")}
               </th>
               <th className="text-center text-xs font-bold text-p-800/40 uppercase tracking-[0.1em] px-5 py-4 border-b-2 border-p-900">
-                POC PCR
+                {t("pocPcr")}
               </th>
             </tr>
           </thead>
           <tbody>
             {rows.map((row, i) => (
-              <tr key={row.capability} className={row.unverified ? "ring-2 ring-red-500 ring-inset" : ""}>
+              <tr key={row.capKey} className={row.unverified ? "ring-2 ring-red-500 ring-inset" : ""}>
                 <td className={`text-left text-[15px] font-medium px-5 py-4 ${i < rows.length - 1 ? "border-b border-p-100/50" : ""} ${row.unverified ? "text-red-500" : "text-p-800"}`}>
-                  {row.capability}
-                  {row.unverified && <span className="ml-2 text-[10px] font-bold text-red-400 bg-red-500/10 px-1.5 py-0.5 uppercase tracking-wider">Verify</span>}
+                  {t(row.capKey)}
+                  {row.unverified && <span className="ml-2 text-[10px] font-bold text-red-400 bg-red-500/10 px-1.5 py-0.5 uppercase tracking-wider">{t("verify")}</span>}
                 </td>
                 <td className={`text-center px-5 py-4 bg-p-600 ${i < rows.length - 1 ? "border-b border-white/10" : ""}`}>
                   <Cell value={row.bugsense} featured />
@@ -197,7 +145,6 @@ export function Comparison() {
                 </td>
               </tr>
             ))}
-            {/* Bottom cap */}
             <tr>
               <td />
               <td className="bg-p-600 h-3 rounded-b-sm" />
@@ -210,8 +157,7 @@ export function Comparison() {
       </div>
 
       <p className="text-xs text-p-800/50 mt-6">
-        * Dipstick confirms leukocytes — not pathogen or resistance.
-        ~ = partial capability depending on device/configuration.
+        {t("footnote")}
       </p>
     </Section>
   );

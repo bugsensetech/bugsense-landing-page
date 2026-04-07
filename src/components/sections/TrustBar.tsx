@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
 
 const partners = [
@@ -12,11 +13,13 @@ const partners = [
 ];
 
 export function TrustBar() {
+  const t = useTranslations("trustBar");
+
   return (
     <Section as="div" className="bg-white border-y border-p-100/40 py-12">
       <div className="text-center mb-8">
         <span className="text-xs font-bold text-muted-custom/50 tracking-[0.12em] uppercase">
-          Backed by
+          {t("backedBy")}
         </span>
       </div>
 
@@ -34,7 +37,6 @@ export function TrustBar() {
           />
         ))}
       </div>
-
     </Section>
   );
 }

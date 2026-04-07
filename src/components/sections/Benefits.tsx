@@ -1,63 +1,66 @@
+import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
 
-const benefits = [
-  {
-    audience: "Clinics & Hospitals",
-    accentBorder: "border-l-p-600",
-    accentColor: "text-p-600",
-    title: "Same-day resistance data. Fewer empirical prescriptions.",
-    body: (
-      <>
-        Reduce antibiotic misuse, cut readmission risk, and save an average of{" "}
-        <strong className="text-p-900 font-semibold">
-          &euro;3,500 per complicated UTI case
-        </strong>{" "}
-        — with actionable results before the patient leaves.
-      </>
-    ),
-  },
-  {
-    audience: "Doctors & Specialists",
-    accentBorder: "border-l-t-600",
-    accentColor: "text-t-600",
-    title: "A diagnostic decision by end of day — not day 4.",
-    body: "Billable as an in-house laboratory service (IGeL). Prescribe with confidence. No more chasing the lab or starting empirical treatment and hoping for the best.",
-  },
-  {
-    audience: "Pharmacies",
-    accentBorder: "border-l-p-400",
-    accentColor: "text-p-400",
-    title: "A new, differentiated health service for walk-in patients.",
-    body: "No lab send-out required. Results same day. A compelling reason to return — and to choose your pharmacy over online alternatives.",
-  },
-  {
-    audience: "Patients",
-    accentBorder: "border-l-t-400",
-    accentColor: "text-t-400",
-    title: "The right antibiotic. The first time.",
-    body: (
-      <>
-        No 4-day wait. No second failed prescription.{" "}
-        <strong className="text-p-900 font-semibold">
-          1 in 2 UTI patients today is treated with the wrong drug
-        </strong>{" "}
-        — BugSense ends that guessing game.
-      </>
-    ),
-  },
-];
-
 export function Benefits() {
+  const t = useTranslations("benefits");
+
+  const benefits = [
+    {
+      audience: t("clinics"),
+      accentBorder: "border-l-p-600",
+      accentColor: "text-p-600",
+      title: t("clinicsTitle"),
+      body: (
+        <>
+          {t("clinicsBodyPrefix")}
+          <strong className="text-p-900 font-semibold">
+            {t("clinicsBodyHighlight")}
+          </strong>
+          {t("clinicsBodySuffix")}
+        </>
+      ),
+    },
+    {
+      audience: t("doctors"),
+      accentBorder: "border-l-t-600",
+      accentColor: "text-t-600",
+      title: t("doctorsTitle"),
+      body: t("doctorsBody"),
+    },
+    {
+      audience: t("pharmacies"),
+      accentBorder: "border-l-p-400",
+      accentColor: "text-p-400",
+      title: t("pharmaciesTitle"),
+      body: t("pharmaciesBody"),
+    },
+    {
+      audience: t("patients"),
+      accentBorder: "border-l-t-400",
+      accentColor: "text-t-400",
+      title: t("patientsTitle"),
+      body: (
+        <>
+          {t("patientsBodyPrefix")}
+          <strong className="text-p-900 font-semibold">
+            {t("patientsBodyHighlight")}
+          </strong>
+          {t("patientsBodySuffix")}
+        </>
+      ),
+    },
+  ];
+
   return (
     <Section id="benefits" className="py-24 lg:py-32 bg-off border-t border-p-100/40">
       <div className="max-w-2xl mb-14">
         <span className="text-xs font-bold tracking-[0.12em] uppercase text-t-600 mb-4 block">
-          Who benefits
+          {t("label")}
         </span>
         <h2 className="text-4xl sm:text-5xl font-extrabold text-p-900 tracking-tight leading-tight">
-          Built for the whole
+          {t("title1")}
           <br />
-          care pathway.
+          {t("title2")}
         </h2>
       </div>
 

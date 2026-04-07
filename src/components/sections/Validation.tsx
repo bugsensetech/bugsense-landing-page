@@ -1,63 +1,44 @@
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
 import { ExternalLink } from "lucide-react";
 
-const supportingMetrics = [
-  {
-    value: "94",
-    unit: "%",
-    label: "Specificity (infection detection)",
-  },
-  {
-    value: "85.6",
-    unit: "%",
-    label: "Sensitivity (pathogen species ID)",
-  },
-  {
-    value: "95",
-    unit: "%",
-    label: "Specificity (pathogen species ID)",
-  },
-  {
-    value: "142",
-    unit: "",
-    label: "Clinical samples validated",
-  },
-  {
-    value: "Int'l",
-    unit: "",
-    label: "Patent granted",
-  },
-];
-
 export function Validation() {
+  const t = useTranslations("validation");
+
+  const supportingMetrics = [
+    { value: t("metric1Value"), unit: t("metric1Unit"), label: t("metric1Label") },
+    { value: t("metric2Value"), unit: t("metric2Unit"), label: t("metric2Label") },
+    { value: t("metric3Value"), unit: t("metric3Unit"), label: t("metric3Label") },
+    { value: t("metric4Value"), unit: "", label: t("metric4Label") },
+    { value: t("metric5Value"), unit: "", label: t("metric5Label") },
+  ];
+
   return (
     <Section id="evidence" className="bg-p-900 py-24 lg:py-32">
       <div className="max-w-2xl mb-14">
         <span className="text-xs font-bold tracking-[0.12em] uppercase text-t-400 mb-4 block">
-          Peer-reviewed evidence
+          {t("label")}
         </span>
         <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-          Clinically validated.
+          {t("title1")}
           <br />
-          Independently published.
+          {t("title2")}
         </h2>
       </div>
 
-      {/* Leading KPI */}
       <div className="bg-t-400/8 border border-t-400/20 p-10 sm:p-14 text-center mb-6">
         <div className="text-7xl sm:text-8xl lg:text-9xl font-extrabold text-t-300 tracking-tighter leading-none">
-          100<span className="text-4xl sm:text-5xl font-bold">%</span>
+          {t("mainValue")}<span className="text-4xl sm:text-5xl font-bold">{t("mainUnit")}</span>
         </div>
         <p className="text-lg sm:text-xl text-white/70 mt-4 font-medium">
-          Sensitivity for infection detection
+          {t("mainLabel")}
         </p>
         <span className="text-xs text-white/30 mt-2 uppercase tracking-wider font-bold block">
-          Primary endpoint · n=142 clinical samples
+          {t("mainNote")}
         </span>
       </div>
 
-      {/* Supporting metrics */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-px bg-white/[0.06] mb-8">
         {supportingMetrics.map((m) => (
           <div key={m.label} className="bg-p-900 p-5 text-center">
@@ -74,7 +55,6 @@ export function Validation() {
         ))}
       </div>
 
-      {/* Citation */}
       <div className="border border-white/[0.06] p-6 flex flex-col sm:flex-row gap-6">
         <Image
           src="/logos/microbiology-spectrum-white.svg"
@@ -87,18 +67,17 @@ export function Validation() {
         <div className="hidden sm:block w-px bg-white/[0.06] shrink-0" />
         <div>
           <p className="text-sm text-white/45 leading-relaxed">
-            Rapid direct disk diffusion testing for antibiotic resistance in
-            urinary tract infections: a bacterial concentration-adjusted approach.
+            {t("citationText")}
             <br />
             <strong className="text-white/70">
-              American Society for Microbiology (ASM), 2025.
+              {t("citationSource")}
             </strong>
           </p>
           <a
             href="mailto:contact@bugsensedx.com?subject=Paper Request"
             className="inline-flex items-center gap-1.5 text-xs font-bold text-t-400 mt-2.5 hover:text-t-300 transition-colors uppercase tracking-wider"
           >
-            Request the paper
+            {t("requestPaper")}
             <ExternalLink className="size-3.5" />
           </a>
         </div>

@@ -1,14 +1,19 @@
+import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
 
-const milestones = [
-  { year: "2021", text: "Technology developed at TUM" },
-  { year: "2022", text: "First clinical samples tested" },
-  { year: "2023", text: "GO-Bio funded · m⁴ Award · Patent filed" },
-  { year: "2024", text: "n=142 clinical validation completed" },
-  { year: "2025", text: "Published in ASM · Pilots launching" },
-];
+const years = ["2021", "2022", "2023", "2024", "2025"];
 
 export function About() {
+  const t = useTranslations("about");
+
+  const milestones = [
+    { year: "2021", text: t("milestone2021") },
+    { year: "2022", text: t("milestone2022") },
+    { year: "2023", text: t("milestone2023") },
+    { year: "2024", text: t("milestone2024") },
+    { year: "2025", text: t("milestone2025") },
+  ];
+
   return (
     <Section
       id="about"
@@ -16,37 +21,28 @@ export function About() {
     >
       <div className="max-w-2xl mb-14">
         <span className="text-xs font-bold tracking-[0.12em] uppercase text-p-600 mb-4 block">
-          About BugSense
+          {t("label")}
         </span>
         <h2 className="text-4xl sm:text-5xl font-extrabold text-p-900 tracking-tight leading-tight mb-6">
-          The technology works.
+          {t("title1")}
           <br />
-          Now we build the company.
+          {t("title2")}
         </h2>
         <div className="space-y-4 text-base text-muted-custom leading-relaxed">
+          <p>{t("paragraph1")}</p>
           <p>
-            BugSense was founded to solve a problem that has persisted for
-            decades: doctors treating UTIs cannot access microbiological culture
-            data at the point where the prescribing decision is made.
-          </p>
-          <p>
-            We built a paper-based platform that replicates the essential steps
-            of clinical microbiology — filtration, incubation, colorimetric
-            detection, and antibiotic susceptibility testing — without a
-            laboratory. Born from research at{" "}
+            {t("paragraph2Prefix")}
             <strong className="text-p-900 font-semibold">
-              Technical University Munich
+              {t("tum")}
             </strong>
-            , validated with clinical partners at{" "}
+            {t("paragraph2Middle")}
             <strong className="text-p-900 font-semibold">
-              MRI Munich (Klinikum rechts der Isar)
+              {t("mri")}
             </strong>
-            .
+            {t("paragraph2Suffix")}
           </p>
         </div>
       </div>
-
-      {/* Timeline — vertical on mobile, horizontal on sm+ */}
 
       {/* Mobile: vertical */}
       <div className="relative sm:hidden">

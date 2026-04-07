@@ -1,37 +1,39 @@
+import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
 import { ArrowRight } from "lucide-react";
 
-const cards = [
-  {
-    label: "For clinicians",
-    title: "Run a pilot",
-    desc: "Evaluate BugSense in your clinic or hospital. No commitment. Full onboarding support.",
-    href: "mailto:contact@bugsensedx.com?subject=Pilot Enquiry",
-  },
-  {
-    label: "For investors",
-    title: "Request materials",
-    desc: "Download our investor deck or schedule a call directly with the founding team.",
-    href: "mailto:contact@bugsensedx.com?subject=Investor Enquiry",
-  },
-  {
-    label: "For partners",
-    title: "Explore a partnership",
-    desc: "Distribution, co-development, or integration. Let\u2019s explore what makes sense together.",
-    href: "mailto:contact@bugsensedx.com?subject=Partnership Enquiry",
-  },
-];
-
 export function CTA() {
+  const t = useTranslations("cta");
+
+  const cards = [
+    {
+      label: t("forClinicians"),
+      title: t("runPilot"),
+      desc: t("runPilotDesc"),
+      href: `mailto:contact@bugsensedx.com?subject=${t("pilotSubject")}`,
+    },
+    {
+      label: t("forInvestors"),
+      title: t("requestMaterials"),
+      desc: t("requestMaterialsDesc"),
+      href: `mailto:contact@bugsensedx.com?subject=${t("investorSubject")}`,
+    },
+    {
+      label: t("forPartners"),
+      title: t("explorePartnership"),
+      desc: t("explorePartnershipDesc"),
+      href: `mailto:contact@bugsensedx.com?subject=${t("partnerSubject")}`,
+    },
+  ];
+
   return (
     <Section id="contact" className="bg-p-900 py-24 lg:py-32">
       <div className="text-center mb-16">
         <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
-          Ready to work together?
+          {t("title")}
         </h2>
         <p className="text-base text-white/40 max-w-md mx-auto leading-relaxed">
-          We&apos;re running clinical pilots, building investor relationships,
-          and exploring strategic partnerships.
+          {t("description")}
         </p>
       </div>
 
@@ -50,7 +52,7 @@ export function CTA() {
               {card.desc}
             </p>
             <div className="flex items-center gap-2 text-sm font-semibold text-p-400/80 group-hover:text-p-200 transition-colors">
-              <span>Get in touch</span>
+              <span>{t("getInTouch")}</span>
               <ArrowRight className="size-3.5 group-hover:translate-x-1 transition-transform duration-200" />
             </div>
           </a>

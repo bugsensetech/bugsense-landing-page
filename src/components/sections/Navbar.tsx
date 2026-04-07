@@ -1,21 +1,24 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { BugSenseIcon } from "@/components/ui/logo";
-
-const navLinks = [
-  { href: "#how-it-works", label: "How It Works" },
-  { href: "#evidence", label: "Evidence" },
-  { href: "#benefits", label: "Who It's For" },
-  { href: "#about", label: "About" },
-];
+import { LanguageSwitcher } from "@/components/ui/language-switcher";
 
 export function Navbar() {
+  const t = useTranslations("navbar");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const navLinks = [
+    { href: "#how-it-works", label: t("howItWorks") },
+    { href: "#evidence", label: t("evidence") },
+    { href: "#benefits", label: t("whoBenefits") },
+    { href: "#about", label: t("about") },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -41,23 +44,25 @@ export function Navbar() {
 
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <Link
+            <a
               key={link.href}
               href={link.href}
               className="text-xs text-white/50 font-semibold uppercase tracking-wider hover:text-white transition-colors"
             >
               {link.label}
-            </Link>
+            </a>
           ))}
         </div>
 
-        <Button
-          render={<Link href="#contact" />}
-          size="sm"
-          className="hidden md:inline-flex"
-        >
-          Request a Pilot
-        </Button>
+        <div className="hidden md:flex items-center gap-3">
+          <LanguageSwitcher />
+          <Button
+            render={<a href="#contact" />}
+            size="sm"
+          >
+            {t("requestPilot")}
+          </Button>
+        </div>
 
         <button
           className="md:hidden text-white/60 hover:text-white transition-colors"
@@ -72,21 +77,24 @@ export function Navbar() {
         <div className="md:hidden border-t border-white/10 bg-p-900/95 backdrop-blur-md px-6 pb-6 pt-4">
           <div className="mx-auto max-w-[1100px] flex flex-col gap-1">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.href}
                 href={link.href}
                 className="text-sm text-white/50 font-semibold uppercase tracking-wider hover:text-white transition-colors py-2.5"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
+            <div className="flex items-center gap-3 mt-3">
+              <LanguageSwitcher />
+            </div>
             <Button
-              render={<Link href="#contact" />}
+              render={<a href="#contact" />}
               className="mt-3 w-full"
               onClick={() => setMobileOpen(false)}
             >
-              Request a Pilot
+              {t("requestPilot")}
             </Button>
           </div>
         </div>

@@ -1,7 +1,10 @@
+import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
 import { BugSenseIcon } from "@/components/ui/logo";
 
 export function Footer() {
+  const t = useTranslations("footer");
+
   return (
     <Section
       as="footer"
@@ -16,7 +19,7 @@ export function Footer() {
           </span>
         </div>
         <span className="text-xs text-white/40 sm:ml-3">
-          Center of Translational Cancer Research · Einsteinstr. 25, 81675 Munich, Germany
+          {t("address")}
         </span>
       </div>
       <a
