@@ -42,7 +42,7 @@ export function Problem() {
   ];
 
   return (
-    <Section id="problem" className="py-24 lg:py-32">
+    <Section id="problem" className="py-24 lg:py-32 bg-white">
       <div className="max-w-2xl mb-14">
         <span className="text-xs font-bold tracking-[0.12em] uppercase text-c-600 mb-4 block">
           {t("label")}

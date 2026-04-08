@@ -34,7 +34,7 @@ export function Advisors() {
   const t = useTranslations("advisors");
 
   return (
-    <Section className="py-24 lg:py-32">
+    <Section className="py-24 lg:py-32 bg-white">
       <div className="max-w-2xl mb-14">
         <span className="text-xs font-bold tracking-[0.12em] uppercase text-p-600 mb-4 block">
           {t("label")}
