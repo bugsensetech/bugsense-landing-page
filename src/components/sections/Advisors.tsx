@@ -16,7 +16,7 @@ const advisors: {
   {
     name: "Dr. Henning Sabersky-Muessigbrodt",
     roleKey: "saberskyRole",
-    initials: "HS",
+    image: "/advisors/sabersky.jpeg",
   },
   {
     name: "Prof. Clarissa Prazeres da Costa",
