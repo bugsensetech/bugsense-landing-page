@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import { BugSenseIcon } from "@/components/ui/logo";
+import { Link } from "@/i18n/navigation";
 
 export function Footer() {
   const t = useTranslations("footer");
@@ -38,6 +39,20 @@ export function Footer() {
         >
           {CONTACT_EMAIL}
         </a>
+      </div>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-white/[0.06] pt-4">
+        <Link
+          href="/imprint"
+          className="text-xs text-white/40 hover:text-white/50 transition-colors"
+        >
+          {t("imprint")}
+        </Link>
+        <Link
+          href="/privacy"
+          className="text-xs text-white/40 hover:text-white/50 transition-colors"
+        >
+          {t("privacyPolicy")}
+        </Link>
       </div>
       {/* Hidden until HAS_NON_ESSENTIAL_COOKIES is enabled in CookieConsent.tsx */}
       {/* <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-white/[0.06] pt-4">

@@ -8,7 +8,7 @@ import { Menu, X } from "lucide-react";
 import { BugSenseIcon } from "@/components/ui/logo";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 
-export function Navbar() {
+export function Navbar({ solid = false, showNav = true }: { solid?: boolean; showNav?: boolean }) {
   const t = useTranslations("navbar");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -29,7 +29,7 @@ export function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 border-b transition-all duration-300 ${
-        scrolled
+        solid || scrolled
           ? "bg-p-900/95 backdrop-blur-md border-white/10"
           : "bg-transparent border-transparent"
       }`}
@@ -42,38 +42,44 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-xs text-white/50 font-semibold uppercase tracking-wider hover:text-white transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
+        {showNav && (
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="text-xs text-white/50 font-semibold uppercase tracking-wider hover:text-white transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+        )}
 
         <div className="hidden md:flex items-center gap-3">
           <LanguageSwitcher />
-          <Button
-            render={<a href="#contact" />}
-            size="sm"
-          >
-            {t("requestPilot")}
-          </Button>
+          {showNav && (
+            <Button
+              render={<a href="#contact" />}
+              size="sm"
+            >
+              {t("requestPilot")}
+            </Button>
+          )}
         </div>
 
-        <button
-          className="md:hidden text-white/60 hover:text-white transition-colors"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
+        {showNav && (
+          <button
+            className="md:hidden text-white/60 hover:text-white transition-colors"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        )}
       </div>
 
-      {mobileOpen && (
+      {showNav && mobileOpen && (
         <div className="md:hidden border-t border-white/10 bg-p-900/95 backdrop-blur-md px-6 pb-6 pt-4">
           <div className="mx-auto max-w-[1100px] flex flex-col gap-1">
             {navLinks.map((link) => (
