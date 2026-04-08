@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, FlaskConical } from "lucide-react";
+import { ArrowRight, FlaskConical, ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 
@@ -9,6 +9,7 @@ export function Hero() {
   const t = useTranslations("hero");
   const videoRef = useRef<HTMLVideoElement>(null);
   const [stage, setStage] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
 
   const stats = [
     { value: t("stat1Value"), label: t("stat1Label") },
@@ -55,6 +56,12 @@ export function Hero() {
       clearTimeout(t4);
       video?.removeEventListener("canplay", onCanPlay);
     };
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const fade = (fromStage: number) =>
@@ -133,6 +140,22 @@ export function Hero() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div
+        className={`absolute bottom-8 left-8 z-10 flex items-center gap-3 transition-opacity duration-500 ${
+          scrolled || stage < 3 ? "opacity-0 pointer-events-none" : "opacity-70 hover:opacity-100"
+        }`}
+      >
+        <div className="flex flex-col items-center">
+          <span className="text-[10px] font-semibold text-white/80 uppercase tracking-[0.2em] mb-2">
+            Scroll
+          </span>
+          <div className="w-[1.5px] h-8 bg-white/30 relative overflow-hidden">
+            <div className="w-full h-3 bg-white absolute animate-[scroll-down_1.5s_ease-in-out_infinite]" />
           </div>
         </div>
       </div>
