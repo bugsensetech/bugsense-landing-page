@@ -1,14 +1,12 @@
 import { setRequestLocale } from "next-intl/server";
 import { Navbar } from "@/components/sections/Navbar";
 import { Hero } from "@/components/sections/Hero";
-import { TrustBar } from "@/components/sections/TrustBar";
 import { Problem } from "@/components/sections/Problem";
+import { Solution } from "@/components/sections/Solution";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Validation } from "@/components/sections/Validation";
-import { Comparison } from "@/components/sections/Comparison";
 import { Benefits } from "@/components/sections/Benefits";
 import { About } from "@/components/sections/About";
-import { Advisors } from "@/components/sections/Advisors";
 import { CTA } from "@/components/sections/CTA";
 import { Footer } from "@/components/sections/Footer";
 
@@ -26,13 +24,11 @@ export default async function Home({
       <main>
         <Hero />
         <Problem />
+        <Solution />
         <HowItWorks />
-        <Validation />
-        <Comparison />
         <Benefits />
+        <Validation />
         <About />
-        <TrustBar />
-        <Advisors />
         <CTA />
       </main>
       <Footer />

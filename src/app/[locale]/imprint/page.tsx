@@ -64,6 +64,15 @@ function ImprintContent() {
               {t("email")}
             </a>
           </p>
+          <p>
+            Tel:{" "}
+            <a
+              href={`tel:${t("phone")}`}
+              className="text-p-700 hover:text-p-900 underline"
+            >
+              {t("phone")}
+            </a>
+          </p>
         </div>
 
         <div>

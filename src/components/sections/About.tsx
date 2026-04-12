@@ -17,7 +17,7 @@ export function About() {
   return (
     <Section
       id="about"
-      className="py-24 lg:py-32 bg-white border-t border-p-100/40"
+      className="py-24 lg:py-32 bg-off border-t border-p-100/40"
     >
       <div className="max-w-2xl mb-14">
         <span className="text-xs font-bold tracking-[0.12em] uppercase text-p-600 mb-4 block">

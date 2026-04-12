@@ -22,22 +22,11 @@ export function Problem() {
       desc: t("stat3Desc"),
       source: t("stat3Source"),
     },
-  ];
-
-  const additionalStats = [
     {
-      prefix: t("additional1Prefix"),
-      value: t("additional1Value"),
-      unverified: true,
-      desc: t("additional1Desc"),
-      source: t("additional1Source"),
-    },
-    {
-      prefix: t("additional2Prefix"),
-      value: t("additional2Value"),
-      unverified: true,
-      desc: t("additional2Desc"),
-      source: t("additional2Source"),
+      prefix: t("stat4Prefix"),
+      value: t("stat4Value"),
+      desc: t("stat4Desc"),
+      source: t("stat4Source"),
     },
   ];
 
@@ -57,7 +46,7 @@ export function Problem() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-p-800/50">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-p-800/50">
         {stats.map((stat) => (
           <div key={stat.value} className="bg-p-900 p-8">
             <div className="text-4xl sm:text-5xl font-extrabold text-white tracking-tighter leading-none mb-3">
@@ -71,33 +60,6 @@ export function Problem() {
             </span>
           </div>
         ))}
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-p-800/50 mt-px">
-        {additionalStats.map((stat) => (
-          <div key={stat.value} className={`bg-p-900 p-8 ${stat.unverified ? "ring-2 ring-red-500 ring-inset relative" : ""}`}>
-            {stat.unverified && (
-              <span className="absolute top-2 right-2 text-[10px] font-bold text-red-400 bg-red-500/20 px-2 py-0.5 uppercase tracking-wider">
-                {t("needsVerification")}
-              </span>
-            )}
-            <div className={`text-4xl sm:text-5xl font-extrabold tracking-tighter leading-none mb-3 ${stat.unverified ? "text-red-400" : "text-white"}`}>
-              {stat.prefix}{stat.value}
-            </div>
-            <p className="text-[15px] text-white/60 leading-relaxed mb-4">
-              {stat.desc}
-            </p>
-            <span className={`text-[11px] font-bold tracking-wider uppercase ${stat.unverified ? "text-red-400/60" : "text-white/30"}`}>
-              {stat.source}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      <div className="border-l-2 border-l-p-600 bg-p-50/40 px-6 py-5 max-w-2xl mt-10">
-        <p className="text-[15px] text-p-800 leading-relaxed font-medium">
-          {t("callout")}
-        </p>
       </div>
     </Section>
   );

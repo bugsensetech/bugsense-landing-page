@@ -1,86 +1,76 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
-import { CONTACT_EMAIL } from "@/lib/constants";
-import { ExternalLink } from "lucide-react";
+
+const partners = [
+  { name: "TUM", logo: "/logos/tum.svg", height: 44 },
+  { name: "TUM Venture Labs", logo: "/logos/tum-venture-labs.png", height: 38 },
+  { name: "BMBF", logo: "/logos/bmbf.svg", height: 50 },
+  { name: "GO-Bio", logo: "/logos/go-bio.svg", height: 38 },
+  { name: "BioM", logo: "/logos/biom.svg", height: 42 },
+  { name: "Bavarian Ministry", logo: "/logos/bavarian-ministry.png", height: 38 },
+  { name: "Zeidler Forschungsstiftung", logo: "/logos/zeidler.png", height: 50 },
+];
 
 export function Validation() {
-  const t = useTranslations("validation");
+  const t = useTranslations("traction");
 
-  const supportingMetrics = [
-    { value: t("metric1Value"), unit: t("metric1Unit"), label: t("metric1Label") },
-    { value: t("metric2Value"), unit: t("metric2Unit"), label: t("metric2Label") },
-    { value: t("metric3Value"), unit: t("metric3Unit"), label: t("metric3Label") },
-    { value: t("metric4Value"), unit: "", label: t("metric4Label") },
-    { value: t("metric5Value"), unit: "", label: t("metric5Label") },
+  const metrics = [
+    { value: t("metric1Value"), label: t("metric1Label") },
+    { value: t("metric2Value"), label: t("metric2Label") },
+    { value: t("metric3Value"), label: t("metric3Label") },
+    { value: t("metric4Value"), label: t("metric4Label") },
   ];
 
   return (
-    <Section id="evidence" className="bg-p-900 py-24 lg:py-32">
+    <Section id="evidence" className="bg-white py-24 lg:py-32">
       <div className="max-w-2xl mb-14">
-        <span className="text-xs font-bold tracking-[0.12em] uppercase text-t-400 mb-4 block">
+        <span className="text-xs font-bold tracking-[0.12em] uppercase text-t-600 mb-4 block">
           {t("label")}
         </span>
-        <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-          {t("title1")}
-          <br />
-          {t("title2")}
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-p-900 tracking-tight leading-tight">
+          {t("title")}
         </h2>
       </div>
 
-      <div className="bg-t-400/8 border border-t-400/20 p-10 sm:p-14 text-center mb-6">
-        <div className="text-7xl sm:text-8xl lg:text-9xl font-extrabold text-t-300 tracking-tighter leading-none">
-          {t("mainValue")}<span className="text-4xl sm:text-5xl font-bold">{t("mainUnit")}</span>
-        </div>
-        <p className="text-lg sm:text-xl text-white/70 mt-4 font-medium">
-          {t("mainLabel")}
-        </p>
-        <span className="text-xs text-white/30 mt-2 uppercase tracking-wider font-bold block">
-          {t("mainNote")}
-        </span>
-      </div>
-
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-px bg-white/[0.06] mb-8">
-        {supportingMetrics.map((m) => (
-          <div key={m.label} className="bg-p-900 p-5 text-center">
-            <div className="text-2xl sm:text-3xl font-extrabold text-white/70 tracking-tighter leading-none">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-px bg-p-100/60 mb-4">
+        {metrics.map((m) => (
+          <div key={m.label} className="bg-white p-8">
+            <div className="text-3xl sm:text-4xl font-extrabold text-p-900 tracking-tighter leading-none mb-3">
               {m.value}
-              {m.unit && (
-                <span className="text-sm font-bold">{m.unit}</span>
-              )}
             </div>
-            <p className="text-xs text-white/35 mt-2 leading-relaxed">
+            <p className="text-sm text-muted-custom leading-relaxed">
               {m.label}
             </p>
           </div>
         ))}
       </div>
 
-      <div className="border border-white/[0.06] p-6 flex flex-col sm:flex-row gap-6">
-        <Image
-          src="/logos/microbiology-spectrum-white.svg"
-          alt="American Society for Microbiology"
-          width={180}
-          height={85}
-          className="shrink-0 opacity-70"
-          style={{ width: 180, height: "auto" }}
-        />
-        <div className="hidden sm:block w-px bg-white/[0.06] shrink-0" />
-        <div>
-          <p className="text-sm text-white/45 leading-relaxed">
-            {t("citationText")}
-            <br />
-            <strong className="text-white/70">
-              {t("citationSource")}
-            </strong>
-          </p>
-          <a
-            href={`mailto:${CONTACT_EMAIL}?subject=Paper Request`}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-t-400 mt-2.5 hover:text-t-300 transition-colors uppercase tracking-wider"
-          >
-            {t("requestPaper")}
-            <ExternalLink className="size-3.5" />
-          </a>
+      <p className="text-xs text-muted-custom/50 mb-16">
+        {t("footnote")}
+      </p>
+
+      {/* Backed by */}
+      <div className="border-t border-p-100/40 pt-14">
+        <div className="text-center mb-8">
+          <span className="text-xs font-bold text-muted-custom/50 tracking-[0.12em] uppercase">
+            {t("backedBy")}
+          </span>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
+          {partners.map((p) => (
+            <Image
+              key={p.name}
+              src={p.logo}
+              alt={p.name}
+              width={0}
+              height={p.height}
+              sizes="200px"
+              className="h-auto w-auto opacity-50 hover:opacity-100 transition-opacity duration-300"
+              style={{ height: p.height, width: "auto" }}
+            />
+          ))}
         </div>
       </div>
     </Section>

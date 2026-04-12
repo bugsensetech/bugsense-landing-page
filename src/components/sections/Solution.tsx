@@ -1,0 +1,69 @@
+import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { Microscope, Clock, MapPin } from "lucide-react";
+
+const icons = [Microscope, Clock, MapPin];
+
+export function Solution() {
+  const t = useTranslations("solution");
+
+  const differentiators = [
+    { title: t("diff1Title"), desc: t("diff1Desc") },
+    { title: t("diff2Title"), desc: t("diff2Desc") },
+    { title: t("diff3Title"), desc: t("diff3Desc") },
+  ];
+
+  return (
+    <section
+      id="solution"
+      className=" py-24 lg:py-32 overflow-hidden bg-gradient-to-br from-p-800 via-p-900 to-p-800"
+    >
+      <div className="relative mx-auto max-w-[1100px] px-8 lg:px-16 ">
+          {/* Phone image - absolute, pinned to bottom right, clipped */}
+          <div className="absolute top-0 -right-40">
+            <Image
+              src="/app-preview.png"
+              alt="BugSense app showing test results"
+              width={500}
+              height={2070}
+              className="opacity-80"
+            />
+          </div>
+
+          {/* Text - full width, on top */}
+          <div className="z-10 max-w-xl ">
+            <span className="text-xs font-bold tracking-[0.12em] uppercase text-p-400 mb-4 block">
+              {t("label")}
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-5 drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
+              {t("title")}
+            </h2>
+            <p className="text-base text-white/90 leading-relaxed max-w-md mb-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
+              {t("description")}
+            </p>
+
+            <div className="flex flex-col gap-5">
+              {differentiators.map((diff, i) => {
+                const Icon = icons[i];
+                return (
+                  <div key={diff.title} className="flex gap-4 items-start">
+                    <div className="w-9 h-9 shrink-0 bg-white/10 text-p-400 flex items-center justify-center rounded-lg backdrop-blur-sm">
+                      <Icon className="size-4" strokeWidth={2} />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-white mb-0.5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
+                        {diff.title}
+                      </h3>
+                      <p className="text-sm text-white/90 leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
+                        {diff.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+      </div>
+    </section>
+  );
+}
