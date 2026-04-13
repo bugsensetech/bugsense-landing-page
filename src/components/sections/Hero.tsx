@@ -57,7 +57,7 @@ export function Hero() {
         }`;
 
     return (
-        <section className="relative min-h-[100vh] bg-p-900 overflow-hidden flex items-center justify-center">
+        <section className="relative min-h-[100vh] bg-p-900 overflow-hidden flex items-center">
             {/* Video as a barely-visible texture */}
             <video
                 ref={videoRef}
@@ -78,20 +78,20 @@ export function Hero() {
             {/* Top fade */}
             <div className="absolute top-0 left-0 right-0 h-[25%] bg-gradient-to-b from-p-900 to-transparent" />
 
-            <div className="relative z-10 mx-auto max-w-[900px] px-6 w-full py-32 text-center">
+            <div className="relative z-10 mx-auto max-w-[1100px] px-6 lg:px-12 w-full py-32">
                 <h1 className={`text-5xl sm:text-6xl lg:text-[84px] font-extrabold text-white leading-[0.95] tracking-tighter mb-6 ${fade(1)}`}>
                     {t("headlineTop")}
                     <br />
                     <span className="text-p-400">{t("headlineBottom")}</span>
                 </h1>
 
-                <p className={`text-lg text-white/70 max-w-2xl mx-auto leading-relaxed mb-10 ${fade(2)}`}>
+                <p className={`text-lg text-white/70 max-w-2xl leading-relaxed mb-10 ${fade(2)}`}>
                     {t("descriptionPrefix")}
                     <strong className="text-white font-semibold">{t("descriptionGuess")}</strong>
                     {t("descriptionSuffix")}
                 </p>
 
-                <div className={`flex flex-wrap justify-center gap-2 mb-16 ${fade(3)}`}>
+                <div className={`flex flex-wrap justify-start gap-2 mb-16 ${fade(3)}`}>
                     <Button render={<a href="#contact" />} size="lg">
                         {t("requestPilot")}
                         <ArrowRight className="size-4" />
@@ -102,7 +102,7 @@ export function Hero() {
                     </Button>
                 </div>
 
-                <div className={`flex items-stretch justify-center ${fade(3)}`}>
+                <div className={`flex items-stretch justify-start ${fade(3)}`}>
                     {stats.map((stat, i) => (
                         <div key={stat.label} className="flex items-stretch">
                             {i > 0 && <div className="w-px bg-white/20 mx-7 hidden sm:block" />}
@@ -122,7 +122,7 @@ export function Hero() {
 
             {/* Scroll indicator */}
             <div
-                className={`absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 transition-opacity duration-500 ${
+                className={`absolute bottom-8 left-8 z-10 flex items-center gap-3 transition-opacity duration-500 ${
                     scrolled || stage < 3 ? "opacity-0 pointer-events-none" : "opacity-70 hover:opacity-100"
                 }`}
             >
