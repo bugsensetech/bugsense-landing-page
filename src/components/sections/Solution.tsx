@@ -16,11 +16,11 @@ export function Solution() {
   return (
     <section
       id="solution"
-      className=" py-24 lg:py-32 overflow-hidden bg-gradient-to-br from-p-800 via-p-900 to-p-800"
+      className=" py-24 lg:py-32 overflow-hidden"
     >
       <div className="relative mx-auto max-w-[1100px] px-8 lg:px-16 ">
           {/* Phone image - absolute, pinned to bottom right, clipped */}
-          <div className="absolute top-0 -right-40">
+          <div className="absolute -top-10 -right-40">
             <Image
               src="/app-preview.png"
               alt="BugSense app showing test results"
@@ -31,7 +31,7 @@ export function Solution() {
           </div>
 
           {/* Text - full width, on top */}
-          <div className="z-10 max-w-xl ">
+          <div className="relative z-10 max-w-xl bg-p-900/60 backdrop-blur-sm rounded-2xl p-6 -m-6">
             <span className="text-xs font-bold tracking-[0.12em] uppercase text-p-400 mb-4 block">
               {t("label")}
             </span>
