@@ -26,12 +26,11 @@ export function Solution() {
               alt="BugSense app showing test results"
               width={500}
               height={2070}
-              className="opacity-80"
             />
           </div>
 
           {/* Text - full width, on top */}
-          <div className="relative z-10 max-w-xl bg-p-900/60 backdrop-blur-sm rounded-2xl p-6 -m-6">
+          <div className="relative z-10 max-w-xl bg-p-900/60 backdrop-blur-sm rounded-sm p-6 -m-6">
             <span className="text-xs font-bold tracking-[0.12em] uppercase text-p-400 mb-4 block">
               {t("label")}
             </span>
@@ -47,7 +46,7 @@ export function Solution() {
                 const Icon = icons[i];
                 return (
                   <div key={diff.title} className="flex gap-4 items-start">
-                    <div className="w-9 h-9 shrink-0 bg-white/10 text-p-400 flex items-center justify-center rounded-lg backdrop-blur-sm">
+                    <div className="w-9 h-9 shrink-0 bg-white/10 text-p-400 flex items-center justify-center backdrop-blur-sm">
                       <Icon className="size-4" strokeWidth={2} />
                     </div>
                     <div>

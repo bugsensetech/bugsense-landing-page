@@ -51,7 +51,7 @@ export function Validation() {
       </p>
 
       {/* Backed by */}
-      <div className="border-t border-p-100/40 pt-14">
+      <div className="border-p-100/40">
         <div className="text-center mb-8">
           <span className="text-xs font-bold text-muted-custom/50 tracking-[0.12em] uppercase">
             {t("backedBy")}
@@ -67,7 +67,7 @@ export function Validation() {
               width={0}
               height={p.height}
               sizes="200px"
-              className="h-auto w-auto opacity-50 hover:opacity-100 transition-opacity duration-300"
+              className="h-auto w-auto"
               style={{ height: p.height, width: "auto" }}
             />
           ))}
