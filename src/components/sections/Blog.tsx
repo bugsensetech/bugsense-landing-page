@@ -63,7 +63,7 @@ function useCtaLabel(type: PostType) {
 
 function ProgressBar({ running, duration }: { running: boolean; duration: number }) {
   return (
-    <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/10">
+    <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-white/10" role="presentation">
       <div
         className={`h-full bg-white/60 ${running ? "animate-[progress-fill_linear_forwards]" : "w-0"}`}
         style={running ? { animationDuration: `${duration}ms` } : undefined}
@@ -81,6 +81,8 @@ function Panel({
   index,
   total,
   autoAdvancing,
+  onHover,
+  onLeave,
 }: {
   item: BlogPost;
   isActive: boolean;
@@ -88,6 +90,8 @@ function Panel({
   index: number;
   total: number;
   autoAdvancing: boolean;
+  onHover: () => void;
+  onLeave: () => void;
 }) {
   const ctaLabel = useCtaLabel(item.type);
 
@@ -99,9 +103,17 @@ function Panel({
         : "";
 
   return (
-    <div
+    <article
+      role="button"
+      tabIndex={0}
       onClick={onActivate}
-      className={`relative overflow-hidden cursor-pointer transition-[flex] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] h-[340px] ${roundedClass} ${
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onActivate(); } }}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
+      onFocus={onHover}
+      onBlur={onLeave}
+      aria-label={item.title}
+      className={`relative overflow-hidden cursor-pointer transition-[flex] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] h-[340px] outline-none focus-visible:ring-2 focus-visible:ring-p-400 ${roundedClass} ${
         isActive ? "flex-[5]" : "flex-[1]"
       }`}
     >
@@ -110,7 +122,7 @@ function Panel({
         {item.image && (
           <img
             src={item.image}
-            alt=""
+            alt={item.title}
             className={`absolute inset-0 w-full h-full object-cover transition-[opacity,transform] duration-700 ${
               isActive ? "scale-105 opacity-50" : "scale-110 opacity-25"
             }`}
@@ -127,6 +139,7 @@ function Panel({
 
       {/* Collapsed: rotated title strip */}
       <div
+        aria-hidden={isActive}
         className={`absolute inset-0 flex items-end justify-center pb-6 transition-opacity duration-300 ${
           isActive ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
@@ -141,6 +154,7 @@ function Panel({
 
       {/* Expanded: content */}
       <div
+        aria-hidden={!isActive}
         className={`absolute inset-0 flex flex-col justify-end p-6 transition-[opacity,transform] duration-500 ${
           isActive
             ? "opacity-100 translate-y-0 delay-100"
@@ -171,7 +185,7 @@ function Panel({
       {isActive && (
         <ProgressBar running={autoAdvancing} duration={AUTO_ADVANCE_MS} />
       )}
-    </div>
+    </article>
   );
 }
 
@@ -190,7 +204,7 @@ function MobileCard({ item }: { item: BlogPost }) {
       {item.image && (
         <img
           src={item.image}
-          alt=""
+          alt={item.title}
           className="absolute inset-0 w-full h-full object-cover opacity-40"
         />
       )}
@@ -225,10 +239,12 @@ function PageDots({
 }) {
   if (total <= 1) return null;
   return (
-    <div className="flex items-center gap-1.5">
+    <div className="flex items-center gap-1.5" role="tablist" aria-label="Pages">
       {Array.from({ length: total }, (_, i) => (
         <button
           key={i}
+          role="tab"
+          aria-selected={i === current}
           onClick={() => onSelect(i)}
           className={`rounded-full transition-all duration-300 ${
             i === current
@@ -237,6 +253,22 @@ function PageDots({
           }`}
           aria-label={`Page ${i + 1}`}
         />
+      ))}
+    </div>
+  );
+}
+
+/* ── Visually hidden SEO block ───────────────────────────────── */
+
+function SeoContent({ items }: { items: BlogPost[] }) {
+  return (
+    <div className="sr-only">
+      {items.map((item) => (
+        <article key={item.id}>
+          <h3>{item.title}</h3>
+          <p>{item.body}</p>
+          <a href={item.link}>{item.title}</a>
+        </article>
       ))}
     </div>
   );
@@ -253,6 +285,7 @@ export function Blog() {
   const [page, setPage] = useState(0);
   const [activeInPage, setActiveInPage] = useState(0);
   const [autoAdvancing, setAutoAdvancing] = useState(true);
+  const [hovered, setHovered] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pauseTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -265,7 +298,6 @@ export function Blog() {
     setActiveInPage((prev) => {
       const next = prev + 1;
       if (next >= pageItems.length) {
-        // move to next page if available, else loop
         setPage((p) => (p + 1 >= totalPages ? 0 : p + 1));
         return 0;
       }
@@ -273,16 +305,15 @@ export function Blog() {
     });
   }, [pageItems.length, totalPages]);
 
-  // Auto-advance timer
+  // Auto-advance timer — pauses on hover/focus
   useEffect(() => {
-    if (!autoAdvancing) return;
+    if (!autoAdvancing || hovered) return;
     timerRef.current = setTimeout(advance, AUTO_ADVANCE_MS);
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [activeInPage, page, autoAdvancing, advance]);
+  }, [activeInPage, page, autoAdvancing, hovered, advance]);
 
-  // When user manually clicks a panel, pause auto-advance for 15s then resume
   const handleManualSelect = useCallback(
     (index: number) => {
       setActiveInPage(index);
@@ -309,6 +340,9 @@ export function Blog() {
 
   return (
     <Section id="blog" className="py-24 lg:py-32 bg-white border-t border-p-100/40">
+      {/* Hidden SEO content — all items always in DOM for crawlers */}
+      <SeoContent items={items} />
+
       {/* Header row with pagination controls */}
       <div className="flex items-end justify-between mb-12">
         <div className="max-w-2xl">
@@ -342,7 +376,7 @@ export function Blog() {
       </div>
 
       {/* Desktop accordion */}
-      <div className="hidden md:flex gap-1">
+      <div className="hidden md:flex gap-1" role="region" aria-label={t("label")}>
         {pageItems.map((item, i) => (
           <Panel
             key={item.id}
@@ -351,7 +385,9 @@ export function Blog() {
             onActivate={() => handleManualSelect(i)}
             index={i}
             total={pageItems.length}
-            autoAdvancing={autoAdvancing}
+            autoAdvancing={autoAdvancing && !hovered}
+            onHover={() => setHovered(true)}
+            onLeave={() => setHovered(false)}
           />
         ))}
       </div>
