@@ -199,27 +199,27 @@ function MobileCard({ item }: { item: BlogPost }) {
       href={item.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex-shrink-0 w-[260px] snap-start rounded-lg overflow-hidden bg-p-900 relative h-[220px]"
+      className="group block rounded-xl overflow-hidden bg-p-900 relative aspect-[16/10]"
     >
       {item.image && (
         <img
           src={item.image}
           alt={item.title}
-          className="absolute inset-0 w-full h-full object-cover opacity-40"
+          className="absolute inset-0 w-full h-full object-cover opacity-45 group-active:opacity-55 transition-opacity duration-300"
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
 
-      <div className="absolute inset-0 flex flex-col justify-end p-4">
-        <h3 className="text-sm font-bold text-white leading-snug mb-1 line-clamp-2">
+      <div className="absolute inset-0 flex flex-col justify-end p-5">
+        <h3 className="text-base font-extrabold text-white leading-snug mb-1.5 line-clamp-2">
           {item.title}
         </h3>
-        <p className="text-[12px] text-white/50 leading-relaxed line-clamp-2 mb-3">
+        <p className="text-[13px] text-white/55 leading-relaxed line-clamp-2 mb-4">
           {item.body}
         </p>
-        <span className="inline-flex items-center gap-1 text-xs font-semibold text-white/70 group-hover:text-white transition-colors">
+        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-white/80 group-active:text-white transition-colors">
           {ctaLabel}
-          <ArrowRight className="size-3" />
+          <ArrowRight className="size-3.5" />
         </span>
       </div>
     </a>
@@ -344,7 +344,7 @@ export function Blog() {
       <SeoContent items={items} />
 
       {/* Header row with pagination controls */}
-      <div className="flex items-end justify-between mb-12">
+      <div className="flex items-end justify-between mb-8 md:mb-12">
         <div className="max-w-2xl">
           <span className="text-xs font-bold tracking-[0.12em] uppercase text-p-600 mb-4 block">
             {t("label")}
@@ -392,13 +392,11 @@ export function Blog() {
         ))}
       </div>
 
-      {/* Mobile horizontal scroll */}
-      <div className="md:hidden -mx-8">
-        <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory px-8 pb-2 scrollbar-hide">
-          {items.map((item) => (
-            <MobileCard key={item.id} item={item} />
-          ))}
-        </div>
+      {/* Mobile vertical list */}
+      <div className="md:hidden flex flex-col gap-4">
+        {items.map((item) => (
+          <MobileCard key={item.id} item={item} />
+        ))}
       </div>
     </Section>
   );
