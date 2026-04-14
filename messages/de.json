@@ -10,9 +10,10 @@
   },
   "navbar": {
     "howItWorks": "So funktioniert\u2019s",
-    "evidence": "Evidenz",
     "whoBenefits": "F\u00fcr wen",
+    "traction": "Traktion",
     "about": "\u00dcber uns",
+    "blog": "Blog",
     "requestPilot": "Pilot anfragen"
   },
   "hero": {
@@ -148,6 +149,14 @@
     "milestone2023": "GO-Bio-gef\u00f6rdert \u00b7 m\u2074 Award \u00b7 Patent angemeldet",
     "milestone2024": "n=142 klinische Validierung abgeschlossen",
     "milestone2025": "In ASM ver\u00f6ffentlicht \u00b7 Pilotprojekte starten"
+  },
+  "blog": {
+    "label": "Neuigkeiten & Updates",
+    "title": "Aktuelles von BugSense.",
+    "ctaNews": "Artikel lesen",
+    "ctaVideo": "Video ansehen",
+    "ctaPodcast": "Jetzt anh\u00f6ren",
+    "ctaBlog": "Beitrag lesen"
   },
   "trustBar": {
     "backedBy": "Unterst\u00fctzt von"

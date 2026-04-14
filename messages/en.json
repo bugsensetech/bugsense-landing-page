@@ -10,9 +10,10 @@
   },
   "navbar": {
     "howItWorks": "How It Works",
-    "evidence": "Evidence",
     "whoBenefits": "Who It's For",
+    "traction": "Traction",
     "about": "About",
+    "blog": "Blog",
     "requestPilot": "Request a Pilot"
   },
   "hero": {
@@ -148,6 +149,14 @@
     "milestone2023": "GO-Bio funded \u00b7 m\u2074 Award \u00b7 Patent filed",
     "milestone2024": "n=142 clinical validation completed",
     "milestone2025": "Published in ASM \u00b7 Pilots launching"
+  },
+  "blog": {
+    "label": "News & Updates",
+    "title": "Latest from BugSense.",
+    "ctaNews": "Read article",
+    "ctaVideo": "Watch video",
+    "ctaPodcast": "Listen now",
+    "ctaBlog": "Read post"
   },
   "trustBar": {
     "backedBy": "Backed by"

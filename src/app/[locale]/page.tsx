@@ -7,6 +7,7 @@ import { HowItWorks } from "@/components/sections/HowItWorks";
 import { Validation } from "@/components/sections/Validation";
 import { Benefits } from "@/components/sections/Benefits";
 import { About } from "@/components/sections/About";
+import { Blog } from "@/components/sections/Blog";
 import { CTA } from "@/components/sections/CTA";
 import { Footer } from "@/components/sections/Footer";
 
@@ -29,6 +30,7 @@ export default async function Home({
         <Benefits />
         <Validation />
         <About />
+        <Blog />
         <CTA />
       </main>
       <Footer />

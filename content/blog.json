@@ -1,0 +1,54 @@
+[
+  {
+    "id": "m4-award-2023",
+    "type": "news",
+    "title": "m4 Award 2023",
+    "body": {
+      "en": "The team won the m4 Award with a prize money of 500,000\u20ac by BioM and the Bavarian Ministry of Economic Affairs, Regional Economics and Energy.",
+      "de": "Das Team gewann den m4 Award mit einem Preisgeld von 500.000\u20ac von BioM und dem Bayerischen Wirtschaftsministerium."
+    },
+    "link": "https://m4-award.org/gewinner.html",
+    "image": "https://www.ee.cit.tum.de/fileadmin/_processed_/f/b/csm_m4_1_7a998e75f8.jpg"
+  },
+  {
+    "id": "tum-ideaward",
+    "type": "video",
+    "title": "BugSense TUM IdeAward",
+    "body": {
+      "en": "The BugSense team won the IdeAward from Zeidler-Stiftung dotated with a prize money of 12,500\u20ac.",
+      "de": "Das BugSense-Team gewann den IdeAward der Zeidler-Stiftung, dotiert mit einem Preisgeld von 12.500\u20ac."
+    },
+    "link": "https://www.youtube.com/watch?v=uD70pZcB8Tk",
+    "image": "https://www.ee.cit.tum.de/fileadmin/_processed_/2/b/csm_20211125_TUM-IDE-Award-2021_UB_-5529-scaled_5fb3a7dc7c.jpg",
+    "embedUrl": "https://www.youtube.com/embed/uD70pZcB8Tk"
+  },
+  {
+    "id": "arzt-karriere",
+    "type": "news",
+    "title": {
+      "en": "BugSense is changing UTI diagnostics",
+      "de": "BugSense ver\u00e4ndert die Diagnostik von Harnwegsinfektion"
+    },
+    "body": {
+      "en": "Featured in Arzt & Karriere Newsletter.",
+      "de": "Ver\u00f6ffentlicht im Arzt & Karriere Newsletter."
+    },
+    "link": "https://arztundkarriere.com/digitale-pioniere/bugsense-diagnostik-von-harnwegsinfektionen-start-up/",
+    "image": "https://www.ee.cit.tum.de/fileadmin/_processed_/6/6/csm_arzt_und_karriere_7120eb710b.png"
+  },
+  {
+    "id": "podcast-utis",
+    "type": "podcast",
+    "title": {
+      "en": "Podcast on UTIs and Female Health",
+      "de": "Podcast \u00fcber Harnwegsinfektionen und Frauengesundheit"
+    },
+    "body": {
+      "en": "A conversation about urinary tract infections, female health, and how BugSense is changing diagnostics.",
+      "de": "Ein Gespr\u00e4ch \u00fcber Harnwegsinfektionen, Frauengesundheit und wie BugSense die Diagnostik ver\u00e4ndert."
+    },
+    "link": "https://open.spotify.com/episode/0U4cSxMxtJTi990Radk3no?si=mybug9x-Q_i2oSwwVFYsLQ",
+    "image": "https://www.ee.cit.tum.de/fileadmin/_processed_/6/9/csm_Podcast_63b1370551.png",
+    "embedUrl": "https://open.spotify.com/embed/episode/0U4cSxMxtJTi990Radk3no"
+  }
+]

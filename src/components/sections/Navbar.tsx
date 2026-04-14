@@ -15,8 +15,8 @@ export function Navbar({ solid = false, showNav = true }: { solid?: boolean; sho
 
   const navLinks = [
     { href: "#how-it-works", label: t("howItWorks") },
-    { href: "#evidence", label: t("evidence") },
     { href: "#benefits", label: t("whoBenefits") },
+    { href: "#traction", label: t("traction") },
     { href: "#about", label: t("about") },
   ];
 

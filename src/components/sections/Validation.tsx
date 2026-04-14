@@ -23,7 +23,7 @@ export function Validation() {
   ];
 
   return (
-    <Section id="evidence" className="bg-white py-24 lg:py-32">
+    <Section id="traction" className="bg-white py-24 lg:py-32">
       <div className="max-w-2xl mb-14">
         <span className="text-xs font-bold tracking-[0.12em] uppercase text-t-600 mb-4 block">
           {t("label")}

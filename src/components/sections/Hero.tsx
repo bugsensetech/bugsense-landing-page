@@ -96,7 +96,7 @@ export function Hero() {
                         {t("requestPilot")}
                         <ArrowRight className="size-4" />
                     </Button>
-                    <Button render={<a href="#evidence" />} variant="outline" size="lg">
+                    <Button render={<a href="#traction" />} variant="outline" size="lg">
                         <FlaskConical className="size-4" />
                         {t("seeScience")}
                     </Button>
