@@ -162,7 +162,7 @@ function LogoSlider() {
     <div className="relative">
       <button
         onClick={() => scroll("left")}
-        className="absolute left-2 top-1/2 -translate-y-1/2 z-50 size-10 rounded-full backdrop-blur-xl bg-white/60 border flex items-center justify-center cursor-pointer transition-all duration-200 "
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-10 size-10 rounded-full backdrop-blur-xl bg-white/60 border flex items-center justify-center cursor-pointer transition-all duration-200 "
         style={{ opacity: canScrollLeft ? 1 : 0, pointerEvents: canScrollLeft ? "auto" : "none" }}
       >
         <ChevronLeft className="size-4" />
@@ -170,7 +170,7 @@ function LogoSlider() {
 
       <button
         onClick={() => scroll("right")}
-        className="absolute right-2 top-1/2 -translate-y-1/2 z-50 size-10 rounded-full backdrop-blur-xl bg-white/60 border  flex items-center justify-center cursor-pointer transition-all duration-200"
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 size-10 rounded-full backdrop-blur-xl bg-white/60 border  flex items-center justify-center cursor-pointer transition-all duration-200"
         style={{ opacity: canScrollRight ? 1 : 0, pointerEvents: canScrollRight ? "auto" : "none" }}
       >
         <ChevronRight className="size-4" />
