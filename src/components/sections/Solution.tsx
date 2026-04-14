@@ -19,18 +19,8 @@ export function Solution() {
       className=" py-24 lg:py-32 overflow-hidden"
     >
       <div className="relative mx-auto max-w-[1100px] px-8 lg:px-16 ">
-          {/* Phone image - absolute, pinned to bottom right, clipped */}
-          <div className="absolute -top-10 -right-40">
-            <Image
-              src="/app-preview.png"
-              alt="BugSense app showing test results"
-              width={500}
-              height={2070}
-            />
-          </div>
-
           {/* Text - full width, on top */}
-          <div className="relative z-10 max-w-xl bg-p-900/60 backdrop-blur-sm rounded-sm p-6 -m-6">
+          <div className="relative z-10 max-w-xl bg-p-900/40 backdrop-blur-sm rounded-sm p-6 -m-6">
             <span className="text-xs font-bold tracking-[0.12em] uppercase text-p-400 mb-4 block">
               {t("label")}
             </span>
@@ -61,6 +51,26 @@ export function Solution() {
                 );
               })}
             </div>
+          </div>
+
+          {/* Phone image - absolute, pinned to bottom right, clipped */}
+          <div className="relative h-92 md:absolute md:top-0 md:w-full md:h-full">
+              <div className="absolute -top-10 md:-top-10 md:-right-10 w-92 md:w-fit">
+                  <Image
+                      src="/app-preview-2.png"
+                      alt="BugSense app showing test results"
+                      width={500}
+                      height={2070}
+                  />
+              </div>
+              <div className="absolute -top-10 right-0 md:-top-10 md:-right-50 w-92 md:w-fit">
+                  <Image
+                      src="/app-preview.png"
+                      alt="BugSense app showing test results"
+                      width={500}
+                      height={2070}
+                  />
+              </div>
           </div>
       </div>
     </section>

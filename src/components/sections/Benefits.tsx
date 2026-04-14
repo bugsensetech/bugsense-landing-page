@@ -50,7 +50,7 @@ export function Benefits() {
         {benefits.map((b) => (
           <div
             key={b.audience}
-            className={`bg-off px-8 py-9 border-l-3 ${b.accentBorder}`}
+            className={`bg-off px-8 py-9 border-l-3 ${b.accentBorder} flex flex-col`}
           >
             <span
               className={`text-xs font-bold uppercase tracking-[0.1em] ${b.accentColor} block mb-4`}
@@ -60,7 +60,7 @@ export function Benefits() {
             <h3 className="text-lg font-bold text-p-900 mb-4 leading-snug">
               {b.title}
             </h3>
-            <p className="text-[15px] text-p-900/50 leading-relaxed mb-6">
+            <p className="text-[15px] text-p-900/50 leading-relaxed mb-6 flex-1">
               {b.body}
             </p>
             <a

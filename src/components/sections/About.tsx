@@ -1,17 +1,16 @@
 import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
 
-const years = ["2021", "2022", "2023", "2024", "2025"];
+const years = ["2023", "2024", "2025", "2027"];
 
 export function About() {
   const t = useTranslations("about");
 
   const milestones = [
-    { year: "2021", text: t("milestone2021") },
-    { year: "2022", text: t("milestone2022") },
-    { year: "2023", text: t("milestone2023") },
-    { year: "2024", text: t("milestone2024") },
-    { year: "2025", text: t("milestone2025") },
+    { year: "2023", text: t("milestone2023"), future: false },
+    { year: "2024", text: t("milestone2024"), future: false },
+    { year: "2025", text: t("milestone2025"), future: false },
+    { year: "2027", text: t("milestone2027"), future: true },
   ];
 
   return (
@@ -46,26 +45,42 @@ export function About() {
 
       {/* Mobile: vertical */}
       <div className="relative sm:hidden">
-        <div className="absolute left-[8px] top-1 bottom-1 w-px bg-p-100" />
+        {/* Solid line spanning past milestones */}
+        <div className="absolute left-[8px] top-1 bottom-[calc(100%-var(--past-end))] w-px bg-p-100" style={{ "--past-end": "100%" } as React.CSSProperties} />
         <div className="space-y-5">
-          {milestones.map((m, i) => (
+          {milestones.filter((m) => !m.future && m.text).map((m) => (
             <div key={m.year} className="flex gap-4 relative pl-1">
+              <div className="absolute left-[8px] top-4 bottom-0 w-px bg-p-100" />
               <div className="relative shrink-0 flex items-start pt-1.5">
-                <div
-                  className={`size-[9px] rounded-full z-10 ${
-                    i === milestones.length - 1 ? "bg-p-600" : "bg-p-200"
-                  }`}
-                />
+                <div className="size-[9px] rounded-full z-10 bg-p-200" />
               </div>
               <div>
-                <span
-                  className={`text-base font-bold tabular-nums block mb-0.5 ${
-                    i === milestones.length - 1 ? "text-p-600" : "text-p-800"
-                  }`}
-                >
+                <span className="text-base font-bold tabular-nums block mb-0.5 text-p-800">
                   {m.year}
                 </span>
                 <p className="text-[15px] text-muted-custom leading-relaxed">
+                  {m.text}
+                </p>
+              </div>
+            </div>
+          ))}
+          {/* Dashed gap */}
+          <div className="flex pl-1">
+            <div className="w-[9px] shrink-0 flex justify-center">
+              <div className="h-6 border-l border-dashed border-p-300" />
+            </div>
+          </div>
+          {/* Future milestone */}
+          {milestones.filter((m) => m.future).map((m) => (
+            <div key={m.year} className="flex gap-4 relative pl-1">
+              <div className="relative shrink-0 flex items-start pt-1.5">
+                <div className="size-[9px] rounded-full z-10 bg-p-600 ring-4 ring-p-100" />
+              </div>
+              <div>
+                <span className="text-base font-bold tabular-nums block mb-0.5 text-p-600">
+                  {m.year}
+                </span>
+                <p className="text-[15px] leading-relaxed text-p-600 font-medium">
                   {m.text}
                 </p>
               </div>
@@ -76,23 +91,33 @@ export function About() {
 
       {/* Desktop: horizontal */}
       <div className="relative hidden sm:block">
-        <div className="absolute top-[5px] left-0 right-0 h-px bg-p-100" />
-        <div className="grid grid-cols-5">
-          {milestones.map((m, i) => (
+        <div className="grid grid-cols-4">
+          {milestones.map((m) => (
             <div key={m.year} className="relative pt-5 pr-6">
-              <div
-                className={`absolute top-0 left-0 size-[11px] rounded-full ${
-                  i === milestones.length - 1 ? "bg-p-600" : "bg-p-200"
-                }`}
-              />
+              {/* Timeline line */}
+              {m.future ? (
+                <div className="absolute top-[5px] -left-4 right-0 border-t border-dashed border-p-300" />
+              ) : (
+                <div className="absolute top-[5px] left-0 right-0 h-px bg-p-100" />
+              )}
+              {/* Dot */}
+              {!!m.year &&
+                <div
+                  className={`absolute top-0 left-0 rounded-full ${
+                    m.future
+                      ? "size-[11px] bg-p-600 ring-4 ring-p-100"
+                      : "size-[11px] bg-p-200"
+                  }`}
+                />
+              }
               <span
                 className={`text-sm font-bold tabular-nums block mb-1 ${
-                  i === milestones.length - 1 ? "text-p-600" : "text-p-800"
+                  m.future ? "text-p-600" : "text-p-800"
                 }`}
               >
                 {m.year}
               </span>
-              <p className="text-[13px] text-muted-custom leading-relaxed">
+              <p className={`text-[13px] leading-relaxed ${m.future ? "text-p-600 font-medium" : "text-muted-custom"}`}>
                 {m.text}
               </p>
             </div>

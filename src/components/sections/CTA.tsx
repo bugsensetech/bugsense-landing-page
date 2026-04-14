@@ -36,7 +36,7 @@ export function CTA() {
         <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-4 max-w-3xl mx-auto leading-tight">
           {t("title")}
         </h2>
-        <p className="text-base text-white/40 max-w-lg mx-auto leading-relaxed">
+        <p className="text-base text-white/80 max-w-lg mx-auto leading-relaxed">
           {t("description")}
         </p>
       </div>
@@ -46,16 +46,16 @@ export function CTA() {
           <a
             key={card.label}
             href={card.href}
-            className="group relative border border-white/[0.08] p-7 hover:border-white/20 transition-all duration-300 hover:bg-white/[0.03]"
+            className="group relative border border-white/15 bg-white/[0.05] p-7 hover:border-white/25 transition-all duration-300 hover:bg-white/[0.08] flex flex-col"
           >
-            <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-p-400/70 block mb-4">
+            <span className="text-[11px] font-bold uppercase tracking-[0.1em] text-p-400 block mb-4">
               {card.label}
             </span>
             <h3 className="text-lg font-bold text-white mb-2">{card.title}</h3>
-            <p className="text-sm text-white/30 leading-relaxed mb-6">
+            <p className="text-sm text-white/80 leading-relaxed mb-6 flex-1">
               {card.desc}
             </p>
-            <div className="flex items-center gap-2 text-sm font-semibold text-p-400/80 group-hover:text-p-200 transition-colors">
+            <div className="flex items-center gap-2 text-sm font-semibold text-p-400 group-hover:text-p-200 transition-colors">
               <span>{card.cta}</span>
               <ArrowRight className="size-3.5 group-hover:translate-x-1 transition-transform duration-200" />
             </div>
