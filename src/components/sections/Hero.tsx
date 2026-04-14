@@ -85,11 +85,17 @@ export function Hero() {
                     <span className="text-p-400">{t("headlineBottom")}</span>
                 </h1>
 
-                <p className={`text-lg text-white/70 max-w-2xl leading-relaxed mb-10 ${fade(2)}`}>
-                    {t("descriptionPrefix")}
-                    <strong className="text-white font-semibold">{t("descriptionGuess")}</strong>
-                    {t("descriptionSuffix")}
-                </p>
+                <div className={`text-lg text-white/70 max-w-2xl leading-relaxed mb-10 ${fade(2)}`}>
+                    <p>
+                        {t("descriptionPrefix")}
+                        <strong className="text-white font-semibold">{t("descriptionGuess")}</strong>
+                        {t("descriptionSuffix")}
+                    </p>
+                    <p className="mt-4">
+                        <strong className="text-white font-semibold">{t("descriptionBrand")}</strong>
+                        {t("descriptionSecondParagraph")}
+                    </p>
+                </div>
 
                 <div className={`flex flex-wrap justify-start gap-2 mb-16 ${fade(3)}`}>
                     <Button render={<a href="#contact" />} size="lg">
