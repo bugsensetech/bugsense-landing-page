@@ -10,7 +10,7 @@ Built with Next.js 16 (App Router) + TypeScript + Tailwind CSS v4 + next-intl (E
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS v4, shadcn/ui primitives, Base UI React
 - **i18n:** next-intl (English default, German)
-- **Hosting:** GitHub Pages (static) — custom domain `bugsensedx.com` once DNS is migrated from Wix
+- **Hosting:** GitHub Pages at custom domain `bugsensedx.com`
 
 ## Local Development
 
@@ -54,7 +54,7 @@ src/
     constants.ts        # SITE_URL, CONTACT_EMAIL
 public/
   index.html            # Static root redirect to user's preferred locale
-  CNAME                 # (added once DNS migration is ready → bugsensedx.com)
+  CNAME                 # Custom domain → bugsensedx.com
   ...                   # Static assets (logos, hero video, images)
 messages/
   en.json
@@ -65,7 +65,7 @@ messages/
 
 - Locales defined in `src/i18n/routing.ts` (`en`, `de`; default `en`).
 - Translations live in `messages/en.json` and `messages/de.json`.
-- No `middleware.ts` / `proxy.ts` — incompatible with static export. Locale detection happens client-side in `public/index.html` (via `navigator.language`) with a noscript fallback to `/en/`.
+- No `middleware.ts` / `proxy.ts` — incompatible with static export. Locale detection happens client-side in `public/index.html` (via `navigator.language`) with a noscript fallback to the default locale.
 - Add a new locale: extend `routing.ts`, add a messages file, and add the matching entry to the root redirect in `public/index.html`, the hreflang alternates in `src/app/[locale]/layout.tsx`, and the sitemap generator in `src/app/sitemap.ts`.
 
 ## SEO
@@ -73,60 +73,41 @@ messages/
 - Per-locale `generateMetadata` in `src/app/[locale]/layout.tsx` produces title, description, keywords, OpenGraph, Twitter card, `canonical`, and `hreflang` alternates.
 - Organization JSON-LD is injected in the root layout.
 - `robots.txt` and `sitemap.xml` are statically generated from `src/app/robots.ts` and `src/app/sitemap.ts` using `SITE_URL` from `src/lib/constants.ts`.
-- Root `/` serves `public/index.html` with `noindex,follow`, canonical pointing at `/en`, and `hreflang` alternates for every locale — so only the canonical locale URLs get indexed.
+- Root `/` serves `public/index.html` with `noindex,follow`, canonical pointing at `/en`, and `hreflang` alternates for every locale — only the canonical locale URLs get indexed.
+- Sitemap is registered in [Google Search Console](https://search.google.com/search-console) as `https://bugsensedx.com/sitemap.xml`.
 
-## Deployment (GitHub Pages)
+## Deployment
 
-Deploys automatically on every push to `main` via `.github/workflows/nextjs.yml`.
+Every push to `main` triggers `.github/workflows/nextjs.yml`, which builds the static export and publishes it to GitHub Pages. The live site is served from `https://bugsensedx.com`.
 
-### Why static export
+### Static export configuration
 
-GitHub Pages only serves static files, so `next.config.ts` is configured with:
+GitHub Pages only serves static files, so `next.config.ts` uses:
+
 - `output: "export"` — produces `out/`
 - `trailingSlash: true` — avoids duplicate-content / 404 issues on GH Pages
 - `images.unoptimized: true` — required for static export (no Next image server)
-- `basePath` / `assetPrefix` — driven by the `NEXT_PUBLIC_BASE_PATH` env var (see below)
+- `basePath` / `assetPrefix` — driven by the optional `NEXT_PUBLIC_BASE_PATH` env var (unset in production; only used for preview deploys served from a non-root path)
 
-`src/app/sitemap.ts` and `src/app/robots.ts` both set `export const dynamic = "force-static"`, which is required when `output: "export"` is active.
+`src/app/sitemap.ts` and `src/app/robots.ts` set `export const dynamic = "force-static"`, which is required when `output: "export"` is active.
 
-### Current state: interim GitHub Pages URL
+### DNS / domain
 
-Until DNS is migrated from Wix, the site is served at:
-
-```
-https://bugsensetech.github.io/bugsense-landing-page/
-```
-
-For this URL to work, the build needs a basePath matching the repo name. The workflow sets it:
-
-```yaml
-- name: Build with Next.js
-  env:
-    NEXT_PUBLIC_BASE_PATH: /bugsense-landing-page
-  run: ...
-```
-
-No `public/CNAME` is committed during this phase — if it were, GitHub Pages would expect the custom domain and the `github.io` URL would break.
-
-Canonical URLs and the sitemap still point to `https://bugsensedx.com` (from `SITE_URL`) on purpose: we don't want Google to index the interim `github.io` URL. Once DNS is migrated, the canonicals already match the real domain.
-
-### Switching to the custom domain (bugsensedx.com)
-
-When ready to migrate DNS from Wix to GitHub Pages:
-
-1. Create `public/CNAME` containing one line: `bugsensedx.com`
-2. In `.github/workflows/nextjs.yml`, remove the `NEXT_PUBLIC_BASE_PATH` env (or set it to an empty string). Assets need to be served from `/`, not `/bugsense-landing-page/`.
-3. Point DNS at GitHub Pages per the [official guide](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site). For an apex domain, add the four A records; optionally add a `www` CNAME.
-4. In GitHub → Settings → Pages, set the custom domain to `bugsensedx.com` and enable **Enforce HTTPS** once the certificate provisions.
-5. Push. The next deploy serves from `https://bugsensedx.com`.
+- Domain: `bugsensedx.com` (registrar: InterNetX via Wix as DNS host)
+- Nameservers stay at Wix: `ns12.wixdns.net`, `ns13.wixdns.net`
+- DNS records pointing the site at GitHub Pages:
+  - A `@` → `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+  - CNAME `www` → `bugsensetech.github.io.`
+- Email (Google Workspace) is untouched: MX records at `aspmx.l.google.com` plus related SPF TXT records are preserved.
+- TLS certificate: Let's Encrypt, auto-provisioned by GitHub Pages. "Enforce HTTPS" is enabled in repo Settings → Pages.
 
 ### Migrating off GitHub Pages (e.g. to Vercel)
 
 The static-export constraints are isolated and easily reversible:
 
-1. `next.config.ts`: remove `output: "export"`, `trailingSlash`, `basePath`, `assetPrefix`, and `images.unoptimized`
-2. Delete `public/index.html` and `public/CNAME`
-3. Remove `export const dynamic = "force-static"` from `src/app/sitemap.ts` and `robots.ts` (optional — leaving them static is fine)
+1. `next.config.ts`: remove `output: "export"`, `trailingSlash`, `basePath`, `assetPrefix`, and `images.unoptimized`.
+2. Delete `public/index.html` and `public/CNAME`.
+3. Remove `export const dynamic = "force-static"` from `src/app/sitemap.ts` and `robots.ts` (optional — leaving them static is fine).
 4. Restore locale middleware — in Next 16 the filename is `src/proxy.ts` (the `middleware` convention is deprecated). `next-intl/middleware` works the same:
    ```ts
    import createMiddleware from "next-intl/middleware";
@@ -134,7 +115,11 @@ The static-export constraints are isolated and easily reversible:
    export default createMiddleware(routing);
    export const config = { matcher: ["/", "/(de|en)/:path*"] };
    ```
-5. Delete `.github/workflows/nextjs.yml`
-6. Point DNS at Vercel and add the domain in the Vercel dashboard
+5. Delete `.github/workflows/nextjs.yml`.
+6. Point DNS at the new host and add the domain in its dashboard.
 
 This unlocks `next/image` optimization, server-side locale detection via `Accept-Language`, ISR/SSR, preview deployments, and edge functions.
+
+## License
+
+See [LICENSE](./LICENSE). All rights reserved by BugSense.

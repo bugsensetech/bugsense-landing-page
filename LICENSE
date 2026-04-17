@@ -1,0 +1,12 @@
+Copyright (c) 2026 BugSense. All rights reserved.
+
+This repository and its contents are proprietary. The source code, copy,
+design, translations, images, logos, and video assets are the property of
+BugSense and, where applicable, their respective third-party owners.
+
+No part of this repository may be copied, modified, redistributed, or used
+to create derivative works, in whole or in part, without prior written
+permission from BugSense.
+
+Third-party dependencies listed in package.json retain their original
+licenses as published by their respective authors.
