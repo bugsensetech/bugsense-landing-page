@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <meta name="robots" content="noindex,follow" />
-    <meta http-equiv="refresh" content="0; url=en/" />
     <link rel="canonical" href="https://bugsensedx.com/en" />
     <link rel="alternate" hreflang="en" href="https://bugsensedx.com/en" />
     <link rel="alternate" hreflang="de" href="https://bugsensedx.com/de" />
@@ -11,12 +10,20 @@
     <title>BugSense</title>
     <script>
       (function () {
+        var base = location.pathname;
+        if (base.charAt(base.length - 1) !== "/") base += "/";
         var l = (navigator.language || "en").toLowerCase();
-        location.replace(l.indexOf("de") === 0 ? "de/" : "en/");
+        var target = l.indexOf("de") === 0 ? "de/" : "en/";
+        location.replace(base + target + location.search + location.hash);
       })();
     </script>
   </head>
   <body>
-    <noscript><a href="en/">Continue to BugSense</a></noscript>
+    <noscript>
+      <p>
+        Please enable JavaScript, or continue to
+        <a href="en/">English</a> / <a href="de/">Deutsch</a>.
+      </p>
+    </noscript>
   </body>
 </html>
