@@ -5,7 +5,6 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
-import { CONTACT_EMAIL } from "@/lib/constants";
 
 const partners = [
   { name: "TUM", logo: "/logos/tum.svg", height: 44 },
@@ -73,7 +72,9 @@ export function Validation() {
             </strong>
           </p>
           <a
-            href={`mailto:${CONTACT_EMAIL}?subject=Paper Request`}
+            href="https://journals.asm.org/doi/10.1128/spectrum.00888-25"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-xs font-bold text-t-600 mt-3 hover:text-t-500 transition-colors uppercase tracking-wider"
           >
             {t("requestPaper")}
