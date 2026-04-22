@@ -20,14 +20,14 @@ export function Solution() {
     >
       <div className="relative mx-auto max-w-[1100px] px-8 lg:px-16 ">
           {/* Text - full width, on top */}
-          <div className="relative z-10 max-w-xl bg-p-900/40 backdrop-blur-sm rounded-sm p-6 -m-6">
+          <div className="relative z-10 max-w-full md:max-w-xl bg-p-900/40 backdrop-blur-xs rounded-sm p-6 -m-6">
             <span className="text-xs font-bold tracking-[0.12em] uppercase text-p-400 mb-4 block">
               {t("label")}
             </span>
             <h2 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-5 drop-shadow-[0_2px_12px_rgba(0,0,0,0.5)]">
               {t("title")}
             </h2>
-            <p className="text-base text-white/90 leading-relaxed max-w-md mb-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
+            <p className="text-base text-white/90 leading-relaxed mb-10 drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
               {t("description")}
             </p>
 
@@ -55,7 +55,7 @@ export function Solution() {
 
           {/* Phone image - absolute, pinned to bottom right, clipped */}
           <div className="relative h-92 md:absolute md:top-0 md:w-full md:h-full">
-              <div className="absolute -top-10 md:-top-10 md:-right-10 w-92 md:w-fit">
+              <div className="absolute hidden -top-10 left-0 min-[37rem]:block md:-top-10 md:left-auto md:-right-10 w-92 md:w-fit">
                   <Image
                       src="/app-preview-2.png"
                       alt="BugSense app showing test results"
@@ -63,7 +63,7 @@ export function Solution() {
                       height={2070}
                   />
               </div>
-              <div className="absolute -top-10 right-0 md:-top-10 md:-right-50 w-92 md:w-fit">
+              <div className="absolute -top-10 left-0 right-0 mx-auto min-[37rem]:left-auto md:-top-10 md:left-auto md:-right-40 w-92 md:w-fit">
                   <Image
                       src="/app-preview.png"
                       alt="BugSense app showing test results"
