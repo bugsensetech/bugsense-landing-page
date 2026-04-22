@@ -59,7 +59,50 @@ public/
 messages/
   en.json
   de.json
+content/
+  blog.json            # Source of truth for the homepage Blog section
 ```
+
+## Blog Content
+
+The **Blog** section on the homepage (`src/components/sections/Blog.tsx`) is rendered from `content/blog.json`. No CMS, no build step — edit the JSON, commit to `main`, and the next deploy picks up the change.
+
+### Schema
+
+Each entry in the top-level array has this shape:
+
+```jsonc
+{
+  "id": "unique-slug",                 // stable, unique — used as React key
+  "type": "news",                      // "news" | "video" | "podcast" | "blog"
+  "title": "String or { en, de }",     // localizable
+  "body":  "String or { en, de }",     // localizable
+  "link":  "String or { en, de }",     // localizable (e.g. language-specific articles)
+  "image": "https://…",                // optional, absolute URL, used as card background
+  "embedUrl": "https://…"              // optional, reserved for inline video/podcast embeds
+}
+```
+
+| Field | Required | Notes |
+| --- | --- | --- |
+| `id` | yes | Stable unique slug. Don't reuse. |
+| `type` | yes | Controls the CTA label via `messages/{locale}.json` → `blog.ctaNews` / `ctaVideo` / `ctaPodcast` / `ctaBlog`. |
+| `title` / `body` / `link` | yes | Either a plain string (same for all locales) or `{ "en": "…", "de": "…" }`. Missing locales fall back to `en`. |
+| `image` | optional | Absolute URL. Rendered with a plain `<img>` (cross-origin is fine). |
+| `embedUrl` | optional | Not rendered today; kept for future inline embeds (YouTube, Spotify, …). |
+
+### Adding or editing a post
+
+1. Open `content/blog.json`.
+2. Add, edit, or reorder entries — **order in the file = order shown on the site**.
+3. If you introduce a new `type`, add the matching `blog.cta*` key to both `messages/en.json` and `messages/de.json`.
+4. Commit to `main`; GitHub Actions rebuilds and deploys.
+
+### Display behavior
+
+- **Desktop:** horizontal accordion, 4 posts per page, auto-advances every 12 s (pauses on hover / manual selection). Pagination dots appear automatically when there are more than 4 items.
+- **Mobile:** vertical list, every item is shown at once.
+- **SEO:** all posts are additionally rendered in a visually hidden block so crawlers index every entry regardless of pagination state.
 
 ## Internationalization
 
