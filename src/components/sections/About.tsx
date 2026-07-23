@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Section } from "@/components/ui/section";
 
-const years = ["2023", "2024", "2025", "2027"];
+const years = ["2023", "2024", "2025", "2026", "2027"];
 
 export function About() {
   const t = useTranslations("about");
@@ -10,6 +10,7 @@ export function About() {
     { year: "2023", text: t("milestone2023"), future: false },
     { year: "2024", text: t("milestone2024"), future: false },
     { year: "2025", text: t("milestone2025"), future: false },
+    { year: "2026", text: t("milestone2026"), future: false },
     { year: "2027", text: t("milestone2027"), future: true },
   ];
 
@@ -91,7 +92,7 @@ export function About() {
 
       {/* Desktop: horizontal */}
       <div className="relative hidden sm:block">
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-5">
           {milestones.map((m) => (
             <div key={m.year} className="relative pt-5 pr-6">
               {/* Timeline line */}

@@ -9,6 +9,7 @@ import { Benefits } from "@/components/sections/Benefits";
 import { About } from "@/components/sections/About";
 import { Blog } from "@/components/sections/Blog";
 import { CTA } from "@/components/sections/CTA";
+import { FundingNotice } from "@/components/sections/FundingNotice";
 import { Footer } from "@/components/sections/Footer";
 
 export default async function Home({
@@ -29,6 +30,7 @@ export default async function Home({
         <HowItWorks />
         <Benefits />
         <Validation />
+        <FundingNotice />
         <About />
         <Blog />
         <CTA />

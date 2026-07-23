@@ -152,6 +152,7 @@
     "milestone2023": "GO-Bio-gef\u00f6rdert \u00b7 m\u2074 Award \u00b7 Patent angemeldet",
     "milestone2024": "n=142 klinische Validierung abgeschlossen",
     "milestone2025": "In ASM ver\u00f6ffentlicht \u00b7 Pilotprojekte starten",
+    "milestone2026": "EXIST-Forschungstransfer gef\u00f6rdert",
     "milestone2027": "Launch BugSense Basic"
   },
   "blog": {
@@ -162,8 +163,8 @@
     "ctaPodcast": "Jetzt anh\u00f6ren",
     "ctaBlog": "Beitrag lesen"
   },
-  "trustBar": {
-    "backedBy": "Unterst\u00fctzt von"
+  "fundingNotice": {
+    "text": "Das Projekt BugSense wird im Rahmen des EXIST-Programms durch das Bundesministerium f\u00fcr Wirtschaft und Energie und den Europ\u00e4ischen Sozialfonds gef\u00f6rdert."
   },
   "advisors": {
     "label": "Wissenschaftlicher Beirat",
