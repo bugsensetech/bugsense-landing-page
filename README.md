@@ -52,8 +52,10 @@ src/
     navigation.ts       # Locale-aware Link/redirect helpers
   lib/
     constants.ts        # SITE_URL, CONTACT_EMAIL
+  layout.tsx          # Pass-through root layout (required for the routes below)
+    page.tsx            # Root URL: client-side locale detection + redirect
+    not-found.tsx       # 404 page, exported as out/404.html
 public/
-  index.html            # Static root redirect to user's preferred locale
   CNAME                 # Custom domain → bugsensedx.com
   ...                   # Static assets (logos, hero video, images)
 messages/
@@ -108,20 +110,25 @@ Each entry in the top-level array has this shape:
 
 - Locales defined in `src/i18n/routing.ts` (`en`, `de`; default `en`).
 - Translations live in `messages/en.json` and `messages/de.json`.
-- No `middleware.ts` / `proxy.ts` — incompatible with static export. Locale detection happens client-side in `public/index.html` (via `navigator.language`) with a noscript fallback to the default locale.
-- Add a new locale: extend `routing.ts`, add a messages file, and add the matching entry to the root redirect in `public/index.html`, the hreflang alternates in `src/app/[locale]/layout.tsx`, and the sitemap generator in `src/app/sitemap.ts`.
+- No `middleware.ts` / `proxy.ts` — incompatible with static export. The root URL is a real route (`src/app/page.tsx`) that detects the locale in the browser via `src/components/LocaleRedirect.tsx`: an explicitly chosen locale (stored in `localStorage` under `bugsense_locale` and mirrored in a `NEXT_LOCALE` cookie by the language switcher) wins, otherwise the first supported entry of `navigator.languages` is used. A `<noscript>` meta refresh falls back to the default locale. This works the same in `next dev` and in the static export.
+- `src/app/layout.tsx` is a pass-through root layout; `<html>`/`<body>` are rendered by `src/app/[locale]/layout.tsx` and by the locale-less root page / not-found page. `dynamicParams = false` on the locale layout makes unknown locales render the 404 page.
+- Add a new locale: extend `routing.ts`, add a messages file, and add its label to `src/app/page.tsx` and its copy to `src/components/NotFoundContent.tsx`. hreflang alternates and the sitemap derive from `routing.locales` automatically.
 
 ## SEO
 
-- Per-locale `generateMetadata` in `src/app/[locale]/layout.tsx` produces title, description, keywords, OpenGraph, Twitter card, `canonical`, and `hreflang` alternates.
-- Organization JSON-LD is injected in the root layout.
+- Per-locale `generateMetadata` in `src/app/[locale]/layout.tsx` produces title, description, keywords, OpenGraph, Twitter card, `canonical`, and `hreflang` alternates. Imprint and privacy pages override these with their own title/description/canonical. URL helpers live in `src/lib/metadata.ts` — all canonical/alternate URLs use trailing slashes to match `trailingSlash: true`.
+- Share images (`og:image` / `twitter:image`) are static PNGs at `public/og-image-{en,de}.png`. Regenerate with `python3 scripts/og-image.py path/to/Montserrat[wght].ttf` (needs Pillow) whenever the hero headline or `metadata.ogDescription` changes.
+- Organization JSON-LD (logo, address, contact, social profiles) is injected in the root layout.
+- `src/app/manifest.ts` generates `/manifest.webmanifest`; `theme-color` is set via the `viewport` export.
+- Icons: browser favicons (`favicon.ico`, `icon-96.png`, `icon-192.png`) are the white mark on a transparent background, plus `favicon.svg` which switches between indigo (light) and white (dark) via `prefers-color-scheme` in Chrome/Firefox; app icons (`apple-touch-icon.png`, `app-icon-{192,512}.png`) sit on the indigo tile. All are generated from `public/icon.svg`'s geometry with `python3 scripts/icons.py`.
 - `robots.txt` and `sitemap.xml` are statically generated from `src/app/robots.ts` and `src/app/sitemap.ts` using `SITE_URL` from `src/lib/constants.ts`.
-- Root `/` serves `public/index.html` with `noindex,follow`, canonical pointing at `/en`, and `hreflang` alternates for every locale — only the canonical locale URLs get indexed.
+- Root `/` is prerendered with `noindex,follow`, canonical pointing at `/en/`, and `hreflang` alternates for every locale — only the canonical locale URLs get indexed.
+- `src/app/not-found.tsx` is exported as `out/404.html`, which GitHub Pages serves for any missing path. Copy switches to German client-side based on the URL or stored locale.
 - Sitemap is registered in [Google Search Console](https://search.google.com/search-console) as `https://bugsensedx.com/sitemap.xml`.
 
 ## Deployment
 
-Every push to `main` triggers `.github/workflows/nextjs.yml`, which builds the static export and publishes it to GitHub Pages. The live site is served from `https://bugsensedx.com`.
+Every push to `main` triggers `.github/workflows/nextjs.yml`, which lints, type-checks, builds the static export and publishes it to GitHub Pages. The live site is served from `https://bugsensedx.com`.
 
 ### Static export configuration
 
@@ -149,7 +156,7 @@ GitHub Pages only serves static files, so `next.config.ts` uses:
 The static-export constraints are isolated and easily reversible:
 
 1. `next.config.ts`: remove `output: "export"`, `trailingSlash`, `basePath`, `assetPrefix`, and `images.unoptimized`.
-2. Delete `public/index.html` and `public/CNAME`.
+2. Delete `public/CNAME`. Optionally replace the client-side root redirect (`src/app/page.tsx`) with a server redirect once middleware is back.
 3. Remove `export const dynamic = "force-static"` from `src/app/sitemap.ts` and `robots.ts` (optional — leaving them static is fine).
 4. Restore locale middleware — in Next 16 the filename is `src/proxy.ts` (the `middleware` convention is deprecated). `next-intl/middleware` works the same:
    ```ts

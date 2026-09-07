@@ -4,8 +4,10 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Montserrat } from "next/font/google";
+import type { Viewport } from "next";
 import { routing } from "@/i18n/routing";
-import { SITE_URL } from "@/lib/constants";
+import { CONTACT_EMAIL, SITE_URL } from "@/lib/constants";
+import { localizedAlternates, localizedUrl, ogImage } from "@/lib/metadata";
 import { CookieConsent } from "@/components/CookieConsent";
 import "../globals.css";
 
@@ -19,6 +21,14 @@ export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
+// Unknown locales render the root not-found page instead of a dev-time
+// "missing param in generateStaticParams" error (required with output: export).
+export const dynamicParams = false;
+
+export const viewport: Viewport = {
+  themeColor: "#26215C",
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -28,6 +38,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "metadata" });
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: t("title"),
     description: t("description"),
     keywords: t("keywords").split(", "),
@@ -35,33 +46,29 @@ export async function generateMetadata({
     openGraph: {
       title: t("ogTitle"),
       description: t("ogDescription"),
-      url: SITE_URL,
+      url: localizedUrl(locale),
       siteName: "BugSense",
       locale: locale === "de" ? "de_DE" : "en_US",
+      alternateLocale: locale === "de" ? ["en_US"] : ["de_DE"],
       type: "website",
+      images: [ogImage(locale)],
     },
     twitter: {
       card: "summary_large_image",
       title: t("twitterTitle"),
       description: t("twitterDescription"),
+      images: [ogImage(locale).url],
     },
     robots: {
       index: true,
       follow: true,
     },
-    alternates: {
-      canonical: `${SITE_URL}/${locale}`,
-      languages: {
-        en: `${SITE_URL}/en`,
-        de: `${SITE_URL}/de`,
-        "x-default": `${SITE_URL}/en`,
-      },
-    },
+    alternates: localizedAlternates(locale),
     icons: {
       icon: [
         { url: "/icon-96.png", sizes: "96x96", type: "image/png" },
         { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
-        { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/favicon.svg", type: "image/svg+xml", sizes: "any" },
       ],
       apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
     },
@@ -95,11 +102,31 @@ export default async function LocaleLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "BugSense",
+              legalName: "BugSense GbR",
               url: SITE_URL,
+              logo: `${SITE_URL}/app-icon-512.png`,
+              email: CONTACT_EMAIL,
               description:
                 locale === "de"
                   ? "Vollständige mikrobiologische HWI-Diagnostik am Point of Care"
                   : "Complete microbiological UTI diagnostics at the point of care",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Einsteinstr. 25",
+                postalCode: "81675",
+                addressLocality: "Munich",
+                addressCountry: "DE",
+              },
+              contactPoint: {
+                "@type": "ContactPoint",
+                email: CONTACT_EMAIL,
+                contactType: "sales",
+                availableLanguage: ["en", "de"],
+              },
+              sameAs: [
+                "https://www.linkedin.com/company/bugsense-diagnostics/",
+                "https://www.instagram.com/bugsense_dx/",
+              ],
             }),
           }}
         />
