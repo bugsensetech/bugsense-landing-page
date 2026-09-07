@@ -219,7 +219,9 @@
     "liabilityForLinksTitle": "Liability for links",
     "liabilityForLinks": "Our website contains links to external third-party websites over whose content we have no influence. Therefore, we cannot assume any liability for this external content. The respective provider or operator of the linked pages is always responsible for their content. The linked pages were checked for possible legal violations at the time of linking. Illegal content was not recognizable at the time of linking.",
     "copyrightTitle": "Copyright",
-    "copyright": "The content and works created by the site operators on these pages are subject to German copyright law. Duplication, editing, distribution, and any kind of use beyond the limits of copyright law require the written consent of the respective author or creator."
+    "copyright": "The content and works created by the site operators on these pages are subject to German copyright law. Duplication, editing, distribution, and any kind of use beyond the limits of copyright law require the written consent of the respective author or creator.",
+    "metaTitle": "Imprint | BugSense",
+    "metaDescription": "Legal notice and company information for BugSense, Munich."
   },
   "privacy": {
     "title": "Privacy Policy",
@@ -238,7 +240,9 @@
     "rightsTitle": "5. Your rights",
     "rights": "You have the right to: request information about your stored personal data free of charge, request correction, blocking, or deletion of your data, withdraw consent for data processing at any time, lodge a complaint with a supervisory authority. For inquiries regarding data protection, please contact us at contact@bugsensedx.com.",
     "changesTitle": "6. Changes to this privacy policy",
-    "changes": "We reserve the right to update this privacy policy to reflect changes in our practices or for other operational, legal, or regulatory reasons. The current version is always available on our website."
+    "changes": "We reserve the right to update this privacy policy to reflect changes in our practices or for other operational, legal, or regulatory reasons. The current version is always available on our website.",
+    "metaTitle": "Privacy Policy | BugSense",
+    "metaDescription": "How BugSense handles personal data on bugsensedx.com."
   },
   "cookieConsent": {
     "title": "We value your privacy",
@@ -254,5 +258,10 @@
     "customize": "Customize",
     "savePreferences": "Save preferences",
     "devNote": "No analytics or marketing tools are currently tracking non-essential user data"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you are looking for does not exist or has moved.",
+    "backHome": "Back to homepage"
   }
 }

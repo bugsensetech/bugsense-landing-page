@@ -219,7 +219,9 @@
     "liabilityForLinksTitle": "Haftung für Links",
     "liabilityForLinks": "Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.",
     "copyrightTitle": "Urheberrecht",
-    "copyright": "Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers."
+    "copyright": "Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.",
+    "metaTitle": "Impressum | BugSense",
+    "metaDescription": "Impressum und Anbieterkennzeichnung von BugSense, M\u00fcnchen."
   },
   "privacy": {
     "title": "Datenschutzerklärung",
@@ -238,7 +240,9 @@
     "rightsTitle": "5. Ihre Rechte",
     "rights": "Sie haben das Recht: unentgeltlich Auskunft über Ihre bei uns gespeicherten personenbezogenen Daten zu erhalten, die Berichtigung, Sperrung oder Löschung Ihrer Daten zu verlangen, erteilte Einwilligungen zur Datenverarbeitung jederzeit zu widerrufen, sich bei einer Aufsichtsbehörde zu beschweren. Für Anfragen zum Datenschutz kontaktieren Sie uns bitte unter contact@bugsensedx.com.",
     "changesTitle": "6. Änderungen dieser Datenschutzerklärung",
-    "changes": "Wir behalten uns vor, diese Datenschutzerklärung zu aktualisieren, um Änderungen unserer Praktiken widerzuspiegeln oder aus anderen betrieblichen, rechtlichen oder regulatorischen Gründen. Die aktuelle Version ist jederzeit auf unserer Website verfügbar."
+    "changes": "Wir behalten uns vor, diese Datenschutzerklärung zu aktualisieren, um Änderungen unserer Praktiken widerzuspiegeln oder aus anderen betrieblichen, rechtlichen oder regulatorischen Gründen. Die aktuelle Version ist jederzeit auf unserer Website verfügbar.",
+    "metaTitle": "Datenschutzerkl\u00e4rung | BugSense",
+    "metaDescription": "Wie BugSense auf bugsensedx.com mit personenbezogenen Daten umgeht."
   },
   "cookieConsent": {
     "title": "Wir respektieren Ihre Privatsph\u00e4re",
@@ -254,5 +258,10 @@
     "customize": "Anpassen",
     "savePreferences": "Einstellungen speichern",
     "devNote": "Es werden derzeit keine Analyse- oder Marketing-Tools zur Erfassung nicht essenzieller Nutzerdaten verwendet"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "backHome": "Zur Startseite"
   }
 }
