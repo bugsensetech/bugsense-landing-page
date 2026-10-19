@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { useTranslations } from "next-intl";
 
 // Set to true when analytics or marketing tools are integrated.
@@ -31,23 +31,40 @@ function getConsent(): CookiePreferences | null {
 
 function setConsent(prefs: CookiePreferences) {
   document.cookie = `${COOKIE_NAME}=${encodeURIComponent(JSON.stringify(prefs))};path=/;max-age=${COOKIE_MAX_AGE};SameSite=Lax`;
+  window.dispatchEvent(new Event("cookie-consent-change"));
 }
+
+// The consent cookie is the source of truth; re-read it whenever it is
+// saved here or cleared by the footer's "cookie settings" link.
+function subscribeToConsent(onChange: () => void) {
+  window.addEventListener("cookie-consent-change", onChange);
+  window.addEventListener("cookie-consent-reset", onChange);
+  return () => {
+    window.removeEventListener("cookie-consent-change", onChange);
+    window.removeEventListener("cookie-consent-reset", onChange);
+  };
+}
+
+const hasConsent = () => getConsent() !== null;
+// Hidden during prerender so the static HTML never contains the banner.
+const hasConsentOnServer = () => true;
 
 export function CookieConsent() {
   const t = useTranslations("cookieConsent");
-  const [visible, setVisible] = useState(false);
+  const visible = !useSyncExternalStore(
+    subscribeToConsent,
+    hasConsent,
+    hasConsentOnServer,
+  );
   const [showDetails, setShowDetails] = useState(false);
   const [analytics, setAnalytics] = useState(false);
   const [marketing, setMarketing] = useState(false);
 
   useEffect(() => {
-    if (!getConsent()) setVisible(true);
-
     function handleReset() {
       setShowDetails(false);
       setAnalytics(false);
       setMarketing(false);
-      setVisible(true);
     }
 
     window.addEventListener("cookie-consent-reset", handleReset);
@@ -57,7 +74,6 @@ export function CookieConsent() {
 
   function accept(prefs: CookiePreferences) {
     setConsent(prefs);
-    setVisible(false);
   }
 
   function acceptAll() {
