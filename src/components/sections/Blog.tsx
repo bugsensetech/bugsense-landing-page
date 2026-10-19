@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Section } from "@/components/ui/section";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
@@ -123,6 +123,8 @@ function Panel({
           <img
             src={item.image}
             alt={item.title}
+            loading="lazy"
+            decoding="async"
             className={`absolute inset-0 w-full h-full object-cover transition-[opacity,transform] duration-700 ${
               isActive ? "scale-105 opacity-50" : "scale-110 opacity-25"
             }`}
@@ -205,6 +207,8 @@ function MobileCard({ item }: { item: BlogPost }) {
         <img
           src={item.image}
           alt={item.title}
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover opacity-45 group-active:opacity-55 transition-opacity duration-300"
         />
       )}
@@ -294,7 +298,9 @@ export function Blog() {
     page * ITEMS_PER_PAGE + ITEMS_PER_PAGE
   );
 
-  const advance = useCallback(() => {
+  // React Compiler memoizes these automatically; manual useCallback wrappers
+  // were flagged by react-hooks/preserve-manual-memoization.
+  const advance = () => {
     setActiveInPage((prev) => {
       const next = prev + 1;
       if (next >= pageItems.length) {
@@ -303,7 +309,7 @@ export function Blog() {
       }
       return next;
     });
-  }, [pageItems.length, totalPages]);
+  };
 
   // Auto-advance timer — pauses on hover/focus
   useEffect(() => {
@@ -312,28 +318,25 @@ export function Blog() {
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [activeInPage, page, autoAdvancing, hovered, advance]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- `advance` is recreated each render; the timer only needs to restart on these state changes
+  }, [activeInPage, page, autoAdvancing, hovered]);
 
-  const handleManualSelect = useCallback(
-    (index: number) => {
-      setActiveInPage(index);
-      setAutoAdvancing(false);
-      if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
-      pauseTimeoutRef.current = setTimeout(() => setAutoAdvancing(true), 15000);
-    },
-    []
-  );
+  const pauseAutoAdvance = () => {
+    setAutoAdvancing(false);
+    if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
+    pauseTimeoutRef.current = setTimeout(() => setAutoAdvancing(true), 15000);
+  };
 
-  const goToPage = useCallback(
-    (p: number) => {
-      setPage(p);
-      setActiveInPage(0);
-      setAutoAdvancing(false);
-      if (pauseTimeoutRef.current) clearTimeout(pauseTimeoutRef.current);
-      pauseTimeoutRef.current = setTimeout(() => setAutoAdvancing(true), 15000);
-    },
-    []
-  );
+  const handleManualSelect = (index: number) => {
+    setActiveInPage(index);
+    pauseAutoAdvance();
+  };
+
+  const goToPage = (p: number) => {
+    setPage(p);
+    setActiveInPage(0);
+    pauseAutoAdvance();
+  };
 
   const prevPage = () => goToPage(page - 1 < 0 ? totalPages - 1 : page - 1);
   const nextPage = () => goToPage(page + 1 >= totalPages ? 0 : page + 1);

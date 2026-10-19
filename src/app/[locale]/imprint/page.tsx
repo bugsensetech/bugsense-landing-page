@@ -1,5 +1,6 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { useTranslations } from "next-intl";
+import { pageMetadata } from "@/lib/metadata";
 import { Section } from "@/components/ui/section";
 import { Navbar } from "@/components/sections/Navbar";
 import { Footer } from "@/components/sections/Footer";
@@ -7,6 +8,21 @@ import { routing } from "@/i18n/routing";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "imprint" });
+  return pageMetadata({
+    locale,
+    path: "/imprint",
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+  });
 }
 
 export default async function ImprintPage({

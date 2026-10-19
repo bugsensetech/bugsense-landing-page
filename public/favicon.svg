@@ -1,0 +1,11 @@
+<svg viewBox="0 0 80.265 80.254" xmlns="http://www.w3.org/2000/svg">
+  <!-- Color-scheme-aware favicon: indigo mark on light tab bars, white on dark. Same geometry as icon.svg. -->
+  <style>
+    path { fill: #26215C; }
+    @media (prefers-color-scheme: dark) { path { fill: #FFFFFF; } }
+  </style>
+  <path d="M38.67 0v38.654H0A38.66 38.66 0 0 1 38.67 0z"/>
+  <path d="M0 80.254V41.594h38.67A38.661 38.661 0 0 1 0 80.254z"/>
+  <path d="M41.6 0v38.654h38.668A38.659 38.659 0 0 0 41.6 0z"/>
+  <path d="M80.265 80.254V41.594H41.6a38.659 38.659 0 0 0 38.665 38.66z"/>
+</svg>
