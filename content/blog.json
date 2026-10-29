@@ -1,5 +1,19 @@
 [
   {
+    "id": "exist-research-transfer",
+    "type": "news",
+    "title": {
+      "en": "\u20ac1.23M EXIST Research Transfer Grant",
+      "de": "1,23 Mio. \u20ac EXIST-Forschungstransfer"
+    },
+    "body": {
+      "en": "BugSense secured \u20ac1.23 million through the EXIST Research Transfer program of the German Federal Ministry for Economic Affairs and Energy (BMWE) to validate its paper-based point-of-care platform and bring it closer to clinical practice.",
+      "de": "BugSense erhielt 1,23 Mio. \u20ac \u00fcber den EXIST-Forschungstransfer des Bundesministeriums f\u00fcr Wirtschaft und Energie (BMWE), um seine papierbasierte Point-of-Care-Plattform zu validieren und n\u00e4her an die klinische Praxis zu bringen."
+    },
+    "link": "https://www.linkedin.com/feed/update/urn:li:activity:7483162212530982912/",
+    "image": "/blog/exist-research-transfer.jpg"
+  },
+  {
     "id": "m4-award-2023",
     "type": "news",
     "title": "m4 Award 2023",
