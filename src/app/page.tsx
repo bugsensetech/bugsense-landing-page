@@ -28,6 +28,9 @@ export const viewport: Viewport = {
 export default function RootPage() {
   return (
     <html lang={routing.defaultLocale}>
+      <head>
+        <LocaleRedirect />
+      </head>
       <body
         style={{
           margin: 0,
@@ -41,7 +44,6 @@ export default function RootPage() {
           fontFamily: "Montserrat, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
         }}
       >
-        <LocaleRedirect />
         {/* Visible fallback if scripts are disabled or the redirect fails */}
         <noscript>
           <meta httpEquiv="refresh" content={`0; url=${routing.defaultLocale}/`} />
